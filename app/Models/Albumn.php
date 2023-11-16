@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Albumn extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'albumn_id';
     protected $fillable = [
-        'user_name',
-        'password',
-        'email',
-        'role'
+        'albumn_name',
+        'number_songs',
+        'cover_photo', 
+        'short_description'
     ];
 }

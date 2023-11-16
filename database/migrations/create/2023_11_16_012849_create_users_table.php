@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->text('cover_photo')->nullable();
             $table->integer('phone_number')->nullable()->unsigned();
-            $table->tinyInteger('Gender')->nullable()->comment('0: MEN; 1:WOMEN');
+            $table->tinyInteger('gender')->nullable()->comment('0: MEN; 1:WOMEN');
             $table->date('dob')->nullable();
             $table->string('country')->nullable();
-            $table->tinyInteger('Role')->comment('0: ADMIN; 1:USER');
+            $table->tinyInteger('role')->comment('0: ADMIN; 1:USER');
             $table->timestamps();
             $table->text('refresh_token')->nullable();
             $table->engine = 'InnoDB';

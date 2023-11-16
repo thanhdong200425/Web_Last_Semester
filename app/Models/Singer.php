@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Singer extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'singer_id';
     protected $fillable = [
-        'user_name',
-        'password',
-        'email',
-        'role'
+        'name',
+        'dob',
+        'short_description',
     ];
 }

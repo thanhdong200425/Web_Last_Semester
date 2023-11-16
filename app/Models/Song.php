@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Song extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'song_id';
     protected $fillable = [
-        'user_name',
-        'password',
-        'email',
-        'role'
+        'song_name',
+        'lyric'
     ];
 }
