@@ -17,7 +17,7 @@ class SingerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'singer_name' => $this->faker->name(),
             'dob' => $this->faker->date(),
             'short_description' => $this->faker->text(200)
         ];

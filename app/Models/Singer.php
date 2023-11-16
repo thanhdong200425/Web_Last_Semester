@@ -10,7 +10,7 @@ class Singer extends Model
     use HasFactory;
     protected $primaryKey = 'singer_id';
     protected $fillable = [
-        'name',
+        'singer_name',
         'dob',
         'short_description',
     ];
