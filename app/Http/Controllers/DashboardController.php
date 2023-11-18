@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $singerQuantity = Singer::count();
         $songQuantity = Song::count();
         $userQuantity = User::count();
-        $singersList = Singer::all();
+        $singersList = Singer::paginate(5);
         return view('pages.dashboard')->with([
             'albumnQuantity' => $albumnQuantity,
             'singerQuantity' => $singerQuantity,

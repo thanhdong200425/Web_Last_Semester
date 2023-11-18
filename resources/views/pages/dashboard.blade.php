@@ -129,8 +129,14 @@
                             </td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-sm-12 col-md-7 col-lg-12 col-xl-12 d-flex justify-content-center">
+                    {{ $singersList->links('vendor.pagination.bootstrap-4') }}
+                </div>
+            </div>
         </div>
         {{-- End of Row --}}
     </div>
