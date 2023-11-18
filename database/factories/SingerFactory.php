@@ -18,8 +18,11 @@ class SingerFactory extends Factory
     {
         return [
             'singer_name' => $this->faker->name(),
+            'stage_name' => $this->faker->lastName(),
             'dob' => $this->faker->date(),
-            'short_description' => $this->faker->text(200)
+            'short_description' => $this->faker->text(200),
+            'country' => $this->faker->country(),
+            'gender' => $this->faker->randomElement(['Male', 'Female', 'Other'])
         ];
     }
 }

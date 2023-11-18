@@ -13,5 +13,8 @@ class Singer extends Model
         'singer_name',
         'dob',
         'short_description',
+        'gender',
+        'stage_name',
+        'country'
     ];
 }

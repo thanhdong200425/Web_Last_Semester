@@ -54,6 +54,7 @@
 			href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="/back/vendors/styles/style.css" />
+
 	</head>
 	<body>
         @include('layouts.headers.header')
@@ -74,5 +75,6 @@
 		<script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 		<script src="/back/vendors/scripts/dashboard3.js"></script>
+		<script src="https://kit.fontawesome.com/28e919254f.js" crossorigin="anonymous"></script>
 	</body>
 </html>

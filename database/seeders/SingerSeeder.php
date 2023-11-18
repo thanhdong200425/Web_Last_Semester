@@ -13,6 +13,6 @@ class SingerSeeder extends Seeder
      */
     public function run(): void
     {
-        Singer::factory()->count(10)->create();
+        Singer::factory()->count(20)->create();
     }
 }
