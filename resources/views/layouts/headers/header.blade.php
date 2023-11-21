@@ -180,7 +180,7 @@
                     <a class="dropdown-item" href="faq.html"
                         ><i class="dw dw-help"></i> Help</a
                     >
-                    <a class="dropdown-item" href="login.html"
+                    <a class="dropdown-item" href="{{ route('sign-in') }}"
                         ><i class="dw dw-logout"></i> Log Out</a
                     >
                 </div>

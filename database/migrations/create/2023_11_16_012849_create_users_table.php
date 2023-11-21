@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->text('cover_photo')->nullable();
-            $table->integer('phone_number')->nullable()->unsigned();
+            $table->string('phone_number')->nullable();
             $table->tinyInteger('gender')->nullable()->comment('0: MEN; 1:WOMEN');
             $table->date('dob')->nullable();
             $table->string('country')->nullable();

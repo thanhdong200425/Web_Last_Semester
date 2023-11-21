@@ -20,7 +20,12 @@ class UserFactory extends Factory
             'username' => $this->faker->userName(),
             'password' => $this->faker->password(),
             'email' => $this->faker->safeEmail(),
-            'role' => $this->faker->randomElement(['0', '1'])
+            'role' => $this->faker->randomElement(['0', '1']),
+            'gender' => $this->faker->randomElement(['0', '1']),
+            'dob' => $this->faker->date(),
+            'cover_photo' => $this->faker->imageUrl(),
+            'country' => $this->faker->country(),
+            'phone_number' => substr($this->faker->phoneNumber(), 0, 10)
         ];
     }
 }

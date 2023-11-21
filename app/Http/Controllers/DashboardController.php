@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $singerQuantity = Singer::count();
         $songQuantity = Song::count();
         $userQuantity = User::count();
-        $singersList = Singer::paginate(5);
+        $singersList = Singer::orderBy('country', 'asc')->paginate(5);
         return view('pages.dashboard')->with([
             'albumnQuantity' => $albumnQuantity,
             'singerQuantity' => $singerQuantity,
@@ -23,5 +23,12 @@ class DashboardController extends Controller
             'userQuantity' => $userQuantity,
             'singersList' => $singersList,
         ]);
+    }
+
+    public function delete(Request $request) 
+    {
+        $singer = Singer::find($request->singer_id);
+        $singer->delete();
+        return redirect()->route('dashboard');
     }
 }
