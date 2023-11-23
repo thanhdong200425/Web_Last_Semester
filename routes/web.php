@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,12 +30,19 @@ Route::prefix('admin')->group(function() {
 
     // Manage user routes
     Route::get('/users', [UserController::class, 'index'])->name('users');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/edit/{id}', [UserController::class, 'update'])->name('users.update');
 
     // Create user routes
     Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/users/create', [UserController::class, 'store'])->name('user.store');
-    
+
+    // Add song routes
+
+    // Manage song routes
+    Route::get('songs', [SongController::class, 'index'])->name('songs');
+    Route::delete('songs/delete/{song_id}', [SongController::class, 'destroy'])->name('song.destroy');
+    Route::get('songs/edit/{song_id}', [SongController::class, 'edit'])->name('song.edit');
+    Route::put('songs/edit/{song_id}', [SongController::class, 'update'])->name('song.update');
 });

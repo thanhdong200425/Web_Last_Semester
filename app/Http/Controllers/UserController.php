@@ -31,7 +31,7 @@ class UserController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'phone_number' => ['numeric', 'digits_between:10,11'],
             'dob' => ['required'],
-            'cover_photo' => ['nullable','max:2048', 'image']
+            'cover_photo' => ['nullable', 'max:2048', 'image']
         ]);
 
         if ($validateData):
@@ -40,7 +40,7 @@ class UserController extends Controller
             $user->role = 1;
             $nameFile = null;
             if ($request->hasFile('cover_photo')):
-                $nameFile = $this->handleImage($request->cover_photo);
+                $nameFile = UserController::handleImage($request->cover_photo);
             endif;
             $user->cover_photo = $nameFile;
             $user->save();
@@ -78,7 +78,7 @@ class UserController extends Controller
         if ($validateData) {
             $nameFile = null;
             if ($request->has('cover_photo')) {
-                $nameFile = $this->handleImage($request->cover_photo);
+                $nameFile = UserController::handleImage($request->cover_photo);
             }
             $user = User::find($request->id);
             $user->fill($request->only('username', 'email', 'gender', 'country', 'dob', 'phone_number'));
@@ -90,10 +90,10 @@ class UserController extends Controller
         }
     }
 
-    public function handleImage($urlImage)
+    public static function handleImage($urlImage)
     {
         $name = $urlImage->getClientOriginalName();
-        $urlImage->move(public_path('uploads'), $name);
+        $urlImage->move(public_path('uploads/'), $name);
         return $name;
     }
 }

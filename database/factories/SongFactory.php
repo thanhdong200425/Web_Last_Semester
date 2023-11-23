@@ -17,8 +17,9 @@ class SongFactory extends Factory
     public function definition(): array
     {
         return [
-            'song_name' => $this->faker->sentence(5),
-            'lyric' => $this->faker->text(200)
+            'song_name' => $this->faker->words(3, true),
+            'lyric' => $this->faker->text(200),
+            'cover_photo' => $this->faker->imageUrl(640, 480),
         ];
     }
 }

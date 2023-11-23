@@ -11,6 +11,7 @@ class Song extends Model
     protected $primaryKey = 'song_id';
     protected $fillable = [
         'song_name',
-        'lyric'
+        'lyric',
+        'cover_photo',
     ];
 }

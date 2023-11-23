@@ -24,8 +24,7 @@ class AuthController extends Controller
         if ($user->password != $credentials['password']) {
             return redirect()->back()->with('error', 'Wrong password');
         }
-        if ($user->role != 0) 
-        {
+        if ($user->role != 0) {
             return redirect()->back()->with('error', 'You are not admin');
         }
         return redirect()->route('dashboard');

@@ -18,11 +18,20 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">
-                        <span class="micon bi bi-house"></span><span class="mtext">Users</span>
+                        <span class="micon bi bi-person"></span><span class="mtext">Users</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ route('user.create') }}">Add User</a></li>
                         <li><a href="{{ route('users') }}">Manage User</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <span class="micon bi bi-file-music"></span><span class="mtext">Songs</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#">Add Song</a></li>
+                        <li><a href="{{ route('songs') }}">Manage Song</a></li>
                     </ul>
                 </li>
             </ul>
