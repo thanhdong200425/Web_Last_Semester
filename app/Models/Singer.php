@@ -15,6 +15,7 @@ class Singer extends Model
         'short_description',
         'gender',
         'stage_name',
-        'country'
+        'country',
+        'short_description',
     ];
 }

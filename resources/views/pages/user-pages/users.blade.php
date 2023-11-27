@@ -61,11 +61,11 @@
                             <div class="table-actions">
                                 <a href="{{ route('users.edit', ['id' => $user->id]) }}" data-color="#265ed7"><i
                                         class="icon-copy dw dw-edit2"></i> </a>
-                                <form id="deleteUser" action="{{ route('users.destroy', ['id' => $user->id]) }}"
+                                <form id="user_{{$user->id}}" action="{{ route('users.destroy', ['id' => $user->id]) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a data-color="#e95959" onclick="document.getElementById('deleteUser').submit()"
+                                    <a data-color="#e95959" onclick="document.getElementById('user_{{$user->id}}').submit()"
                                         style="cursor: pointer;" class="ml-2">
                                         <i class="icon-copy dw dw-delete-3"></i>
                                     </a>

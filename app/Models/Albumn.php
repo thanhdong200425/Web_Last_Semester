@@ -11,8 +11,7 @@ class Albumn extends Model
     protected $primaryKey = 'albumn_id';
     protected $fillable = [
         'albumn_name',
-        'number_songs',
-        'cover_photo', 
+        'number_songs', 
         'short_description'
     ];
 }

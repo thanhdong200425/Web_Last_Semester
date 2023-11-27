@@ -86,8 +86,8 @@
                         <td class="small-text">{{ $song->updated_at }}</td>
                         <td>
                             @php
-                                $nameFile = file_exists(public_path('uploads/' . $song->cover_photo)) ? 'public/uploads/' . $song->cover_photo : $song->cover_photo;
-                                dd($nameFile);
+                                $nameFile = file_exists(public_path('uploads/' . $song->cover_photo)) ? asset('uploads/' . $song->cover_photo) : $song->cover_photo;
+                                
                             @endphp
                             <img src="{{ $nameFile }}" alt="Cover Photo" style="max-width: 50px;">
                         </td>

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SingerController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AlbumnController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::view('/', 'pages.sign-in');
 
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->group(function () {
     // Auth routes
     Route::get('/', [AuthController::class, 'show_form'])->name('sign-in');
     Route::post('/', [AuthController::class, 'authentiacte'])->name('auth.sign-in');
@@ -26,7 +28,7 @@ Route::prefix('admin')->group(function() {
 
     // Dashboard routes
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::delete('/dashboard/delete/{singer_id}', [DashboardController::class, 'delete'] )->name('dashboard.delete-singer');
+    Route::delete('/dashboard/delete/{singer_id}', [DashboardController::class, 'delete'])->name('dashboard.delete-singer');
 
     // Manage user routes
     Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -39,10 +41,33 @@ Route::prefix('admin')->group(function() {
     Route::post('/users/create', [UserController::class, 'store'])->name('user.store');
 
     // Add song routes
+    Route::get('/songs/create', [SongController::class, 'create'])->name('song.create');
+    Route::post('/songs/create', [SongController::class, 'store'])->name('song.store');
 
     // Manage song routes
     Route::get('songs', [SongController::class, 'index'])->name('songs');
     Route::delete('songs/delete/{song_id}', [SongController::class, 'destroy'])->name('song.destroy');
     Route::get('songs/edit/{song_id}', [SongController::class, 'edit'])->name('song.edit');
     Route::put('songs/edit/{song_id}', [SongController::class, 'update'])->name('song.update');
+
+    // Add singer routes
+    Route::get('/singers/create', [SingerController::class, 'create'])->name('singer.create');
+    Route::post('/singers/create', [SingerController::class, 'store'])->name('singer.store');
+
+    // Manage singer routes
+    Route::get('/singers', [SingerController::class, 'index'])->name('singers');
+    Route::get('/singers/edit/{singer_id}', [SingerController::class, 'edit'])->name('singer.edit');
+    Route::put('/singers/eidt/{singer_id}', [SingerController::class, 'update'])->name('singer.update');
+    Route::delete('/singers/delete/{singer_id}', [SingerController::class, 'destroy'])->name('singer.delete');
+
+    // Add albumn routes
+    Route::get('/albumns/create', [AlbumnController::class, 'create'])->name('albumn.create');
+    Route::post('/albumns/create', [AlbumnController::class, 'store'])->name('albumn.store');
+
+
+    // Manage albumns routes
+    Route::get('/albumns', [AlbumnController::class, 'index'])->name('albumns');
+    Route::delete('/albumns/delete/{albumn_id}', [AlbumnController::class, 'destroy'])->name('albumn.delete');
+    Route::get('/albumns/edit/{albumn_id}', [AlbumnController::class, 'edit'])->name('albumn.edit');
+    Route::put('/albumns/edit/{albumn_id}', [AlbumnController::class, 'update'])->name('albumn.update');
 });

@@ -38,11 +38,10 @@ class UserController extends Controller
             $user = new User();
             $user->fill($request->only('username', 'password', 'email', 'phone_number', 'gender', 'country', 'dob'));
             $user->role = 1;
-            $nameFile = null;
             if ($request->hasFile('cover_photo')):
                 $nameFile = UserController::handleImage($request->cover_photo);
+                $user->cover_photo = $nameFile;
             endif;
-            $user->cover_photo = $nameFile;
             $user->save();
             return redirect()->route('users');
         else:
@@ -76,15 +75,12 @@ class UserController extends Controller
 
         // Hanlde when data is valid or not
         if ($validateData) {
-            $nameFile = null;
-            if ($request->has('cover_photo')) {
-                $nameFile = UserController::handleImage($request->cover_photo);
-            }
             $user = User::find($request->id);
             $user->fill($request->only('username', 'email', 'gender', 'country', 'dob', 'phone_number'));
+            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $user->cover_photo ;
             $user->cover_photo = $nameFile;
             $user->save();
-            return redirect()->route('users.edit', ['id' => $user->id]);
+            return redirect()->route('users');
         } else {
             return redirect()->route('users.edit', ['id' => $request->id])->withErrors($validateData);
         }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Singer;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class SongController extends Controller
@@ -25,7 +27,7 @@ class SongController extends Controller
         endif;
         return redirect()->route('songs')->withErrors(['Song not found']);
     }
-    
+
     public function edit(Request $request)
     {
         $song = Song::find($request->song_id);
@@ -43,21 +45,63 @@ class SongController extends Controller
             'cover_photo' => ['nullable', 'image', 'max:2048']
         ]);
 
-        $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->file('cover_photo')) : null;
-         
-        if ($validateData) 
-        {
+        if ($validateData) {
             $song = Song::find($request->song_id);
             $song->fill([
                 'song_name' => $validateData['song_name'],
-                'lyric' => $validateData['lyric'],
-                'cover_photo' => $nameFile
+                'lyric' => $validateData['lyric']
             ]);
+
+            if ($request->hasFile('cover_photo')) {
+                $nameFile = UserController::handleImage($request->cover_photo);
+                $song->cover_photo = $nameFile;
+            }
 
             $song->save();
             return redirect()->route('songs');
         }
 
         return redirect()->route('songs.edit', ['song_id' => $request->song_id])->withErrors($validateData);
+    }
+
+    public function create()
+    {
+        return view('pages.song-pages.create-song');
+    }
+
+    public function store(Request $request)
+    {
+        $validateData = $request->validate([
+            'song_name' => ['required', 'string', 'max:255'],
+            'singer_name' => ['required', 'string', 'max:255', 'exists:singers,singer_name'],
+            'cover_photo' => ['required', 'image', 'max:2048'],
+            'lyric' => ['nullable', 'string']
+        ]);
+
+        if ($validateData) {
+            $song = new Song();
+            if ($request->hasFile('cover_photo')) {
+                $nameFile = UserController::handleImage($request->cover_photo);
+                $song->cover_photo = $nameFile;
+            }
+
+            $song->fill([
+                'song_name' => $validateData['song_name'],
+                'lyric' => $validateData['lyric']
+            ]);
+            $song->save();
+
+            $singer = DB::table('singers')
+                ->where('singer_name', '=', $validateData['singer_name'])
+                ->first();
+            DB::table('song_singers')
+                ->insert([
+                    'song_id' => $song->song_id,
+                    'singer_id' => $singer->singer_id
+                ]);
+            return redirect()->route('songs');
+        }
+
+        return redirect()->route('songs.create')->withErrors($validateData);
     }
 }

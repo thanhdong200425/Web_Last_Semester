@@ -22,7 +22,8 @@ class SingerFactory extends Factory
             'dob' => $this->faker->date(),
             'short_description' => $this->faker->text(200),
             'country' => $this->faker->country(),
-            'gender' => $this->faker->randomElement(['Male', 'Female', 'Other'])
+            'gender' => $this->faker->randomElement(['Male', 'Female', 'Other']),
+            'cover_photo' => $this->faker->imageUrl(640, 480)
         ];
     }
 }
