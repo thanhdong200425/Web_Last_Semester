@@ -42,7 +42,6 @@ class SingerController extends Controller
             $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $singer->cover_photo;
             $singer->cover_photo = $nameFile;
             $singer->save();
-            
             return redirect()->route('singers');
         }
 

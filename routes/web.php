@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\SingerController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlbumnController;
+use App\Http\Middleware\CheckUserIsActive;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +21,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::view('/', 'pages.sign-in');
+Route::get('/', [AuthController::class, 'show_form'])->name('sign-in');
+Route::post('/', [AuthController::class, 'authentiacte'])->middleware('check_user_is_active')->name('auth.sign-in');
+Route::get('/sign-up', [SignUpController::class, 'index'])->name('sign-up');
+Route::post('/sign-up', [SignUpController::class, 'store'])->name('sign-up.store');
 
-Route::prefix('admin')->group(function () {
-    // Auth routes
-    Route::get('/', [AuthController::class, 'show_form'])->name('sign-in');
-    Route::post('/', [AuthController::class, 'authentiacte'])->name('auth.sign-in');
-    Route::get('/sign-up', [AuthController::class, 'show_form_sign_up'])->name('sign-up');
-
+Route::prefix('admin')->middleware('is_login')->group(function () {
     // Dashboard routes
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::delete('/dashboard/delete/{singer_id}', [DashboardController::class, 'delete'])->name('dashboard.delete-singer');
@@ -70,4 +71,12 @@ Route::prefix('admin')->group(function () {
     Route::delete('/albumns/delete/{albumn_id}', [AlbumnController::class, 'destroy'])->name('albumn.delete');
     Route::get('/albumns/edit/{albumn_id}', [AlbumnController::class, 'edit'])->name('albumn.edit');
     Route::put('/albumns/edit/{albumn_id}', [AlbumnController::class, 'update'])->name('albumn.update');
+
+    // Logout routes
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Profile routes
+    Route::get('/profile/my', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/my', [ProfileController::class, 'update'])->name('profile.update');
+    
 });

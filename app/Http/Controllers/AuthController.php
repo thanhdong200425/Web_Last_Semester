@@ -4,33 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     //
-    public function show_form()
+    public function show_form(Request $request)
     {
         return view('pages.sign-in');
     }
 
     public function authentiacte(Request $request)
     {
-        $col = 'username';
-        $credentials = $request->only('username', 'password');
-        $user = User::where($col, $credentials['username'])->first();
-        if (empty($user)) {
-            return redirect()->back()->with('error', 'User not found');
-        }
-        if ($user->password != $credentials['password']) {
-            return redirect()->back()->with('error', 'Wrong password');
-        }
-        if ($user->role != 0) {
-            return redirect()->back()->with('error', 'You are not admin');
-        }
+        //Create a new session
+        
+        $user = User::where('username', $request->username)->first();
+        $request->session()->put('admin', $user);
+        $request->session()->regenerate();
         return redirect()->route('dashboard');
     }
-    public function show_form_sign_up()
+
+    public function logout()
     {
-        return view('pages.sign-up');
+        session()->forget('admin');
+        return redirect()->route('sign-in');
     }
 }

@@ -44,21 +44,42 @@
                         <div class="login-title">
                             <h1 class="text-center text-primary">Login</h1>
                         </div>
-                        @if(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
+
+                        {{-- Display error --}}
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
                         @endif
+
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger">
+                                    {{ $error }}
+                                </div>
+                            @endforeach
+                        @endif
+
+                        {{-- Display success --}}
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+
                         <form action="{{ route('auth.sign-in') }}" method="post">
                             @csrf
                             <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" placeholder="Username" name="username" />
+                                <input type="text" class="form-control form-control-lg" placeholder="Username"
+                                    name="username" />
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
                             </div>
                             <div class="input-group custom">
-                                <input type="password" class="form-control form-control-lg" placeholder="**********" name="password" />
+                                <input type="password" class="form-control form-control-lg" placeholder="**********"
+                                    name="password" />
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                 </div>
@@ -66,7 +87,8 @@
                             <div class="row pb-30">
                                 <div class="col-6">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1"
+                                            name="remember" value="remember" />
                                         <label class="custom-control-label" for="customCheck1">Remember</label>
                                     </div>
                                 </div>
@@ -86,7 +108,7 @@
                                     </div>
                                     <div class="input-group mb-0">
                                         <a class="btn btn-outline-primary btn-lg btn-block"
-                                            href="{{route('sign-up')}}">Register To Create Account</a>
+                                            href="{{ route('sign-up') }}">Register To Create Account</a>
                                     </div>
                                 </div>
                             </div>

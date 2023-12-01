@@ -10,7 +10,11 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $user = session('admin');
+        $username = $user['username'];
+        $token = $user['_token'];
         $albumnQuantity = Albumn::count();
         $singerQuantity = Singer::count();
         $songQuantity = Song::count();
@@ -22,10 +26,12 @@ class DashboardController extends Controller
             'songQuantity' => $songQuantity,
             'userQuantity' => $userQuantity,
             'singersList' => $singersList,
+            'username' => $username,
+            'token' => $token,
         ]);
     }
 
-    public function delete(Request $request) 
+    public function delete(Request $request)
     {
         $singer = Singer::find($request->singer_id);
         $singer->delete();
