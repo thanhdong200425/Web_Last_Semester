@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class SignUpController extends Controller
 {
@@ -31,9 +34,11 @@ class SignUpController extends Controller
             DB::table('users')->insert([
                 'email' => $request->email,
                 'username' => $request->username,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),   
+                'origin_password' => $request->password,
                 'role' => 0,
-                'is_active' => 1
+                'is_active' => 1,
+                'remember_token' => Str::random(40),
             ]);
             
             return redirect()->route('sign-in')->with('success', 'User created successfully!');

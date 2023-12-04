@@ -29,4 +29,15 @@ class User extends Authenticatable
         'remember_token',
         'origin_password',
     ];
+
+    public static function authenticateUser($username, $origin_password): bool|User
+    {
+        $user = User::where('username', $username)->first();
+        if ($user) {
+            if (password_verify($origin_password, $user->password)) {
+                return $user;
+            }
+        }
+        return false;
+    }
 }

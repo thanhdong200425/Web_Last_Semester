@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [AuthController::class, 'show_form'])->name('sign-in');
-Route::post('/', [AuthController::class, 'authentiacte'])->middleware('check_user_is_active')->name('auth.sign-in');
+Route::get('/', [AuthController::class, 'show_form'])->middleware('is_remember_user')->name('sign-in');
+Route::post('/', [AuthController::class, 'authenticate'])->middleware('check_user_is_active')->name('auth.sign-in');
 Route::get('/sign-up', [SignUpController::class, 'index'])->name('sign-up');
 Route::post('/sign-up', [SignUpController::class, 'store'])->name('sign-up.store');
 
@@ -61,12 +61,12 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     Route::put('/singers/eidt/{singer_id}', [SingerController::class, 'update'])->name('singer.update');
     Route::delete('/singers/delete/{singer_id}', [SingerController::class, 'destroy'])->name('singer.delete');
 
-    // Add albumn routes
+    // Add album routes
     Route::get('/albumns/create', [AlbumnController::class, 'create'])->name('albumn.create');
     Route::post('/albumns/create', [AlbumnController::class, 'store'])->name('albumn.store');
 
 
-    // Manage albumns routes
+    // Manage albums routes
     Route::get('/albumns', [AlbumnController::class, 'index'])->name('albumns');
     Route::delete('/albumns/delete/{albumn_id}', [AlbumnController::class, 'destroy'])->name('albumn.delete');
     Route::get('/albumns/edit/{albumn_id}', [AlbumnController::class, 'edit'])->name('albumn.edit');
@@ -78,5 +78,8 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     // Profile routes
     Route::get('/profile/my', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile/my', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/my/update-image', [ProfileController::class, 'updateImage'])->name('profile.update-image');
+    
+    // Search routes
     
 });

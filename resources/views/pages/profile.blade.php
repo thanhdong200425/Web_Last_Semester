@@ -61,11 +61,17 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <input type="submit" value="Update" class="btn btn-primary" />
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            <form action="{{ route('profile.update-image') }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="file" name="image" class="btn">
+                                                <input type="submit" value="Update" class="btn btn-primary" />
+                                            </form>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                 Close
                                             </button>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -90,10 +96,14 @@
                                     {{ $admin->country }}
                                 </li>
                                 <li>
-                                    @php 
-                                        $dateVal = explode('-', $admin->dob);
-                                        $month = date('F', mktime(0, 0, 0, $dateVal[1]));
-                                        $date = $dateVal[2] . ' ' . $month . ' ' . $dateVal[0];
+                                    @php
+                                        if ($admin->dob):
+                                            $dateVal = explode('-', $admin->dob);
+                                            $month = date('F', mktime(0, 0, 0, $dateVal[1]));
+                                            $date = $dateVal[2] . ' ' . $month . ' ' . $dateVal[0];
+                                        else:
+                                            $date = 'N/A';
+                                        endif;
                                     @endphp
                                     <span>Date of birth</span>
                                     {{ $date }}

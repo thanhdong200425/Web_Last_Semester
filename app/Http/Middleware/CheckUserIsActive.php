@@ -22,24 +22,30 @@ class CheckUserIsActive
             'password' => ['required'],
         ]);
 
-        if (!$validationData) {
-            return redirect()->back()->withErrors($validationData);
+        if ($validationData) {
+            return $next($request);
         }
 
-        $user = DB::table('users')->where('username', $request->username)->first();
+        return redirect()->back()->withErrors($validationData);
 
-        if (empty($user))
-            return redirect()->back()->with('error', 'User not found');
+        // if (!$validationData) {
+        //     return redirect()->back()->withErrors($validationData);
+        // }
 
-        if ($user->is_active === 0)
-            return redirect()->back()->with('error', 'Your account is not active. Please contact admin to active your account');
+        // $user = DB::table('users')->where('username', $request->username)->first();
 
-        if ($user->role !== 0)
-            return redirect()->back()->with('error', 'You are not admin');
+        // if (empty($user))
+        //     return redirect()->back()->with('error', 'User not found');
 
-        if ($user->password != $request->password)
-            return redirect()->back()->with('error', 'Wrong password');
+        // if ($user->is_active === 0)
+        //     return redirect()->back()->with('error', 'Your account is not active. Please contact admin to active your account');
 
-        return $next($request);
+        // if ($user->role !== 0)
+        //     return redirect()->back()->with('error', 'You are not admin');
+
+        // if ($user->password != $request->password)
+        //     return redirect()->back()->with('error', 'Wrong password');
+
+        // return $next($request);
     }
 }

@@ -67,7 +67,6 @@
                             </div>
                         @endif
 
-
                         <form action="{{ route('auth.sign-in') }}" method="post">
                             @csrf
                             <div class="input-group custom">
@@ -88,8 +87,8 @@
                                 <div class="col-6">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1"
-                                            name="remember" value="remember" />
-                                        <label class="custom-control-label" for="customCheck1">Remember</label>
+                                            name="remember"/>
+                                        <label class="custom-control-label" for="customCheck1">Remember Me</label>
                                     </div>
                                 </div>
                                 <div class="col-6">

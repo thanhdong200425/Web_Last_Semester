@@ -11,16 +11,16 @@ class ProfileController extends Controller
     {
         $adminInfo = session('admin');
         return view('pages.profile', [
-            'admin' => $adminInfo 
+            'admin' => $adminInfo
         ]);
     }
 
     public function update(Request $request)
     {
         $validationData = $request->validate([
-            'username' => ['nullable','string', 'max:255', 'unique:users,username'],
-            'email' => ['nullable','string', 'email', 'max:255', 'unique:users,email'],
-            'dob' => ['nullable','date'],
+            'username' => ['nullable', 'string', 'max:255', 'unique:users,username'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users,email'],
+            'dob' => ['nullable', 'date'],
             'gender' => ['nullable'],
             'country' => ['nullable'],
             'phone_number' => ['nullable', 'digits_between:10,11'],
@@ -37,6 +37,7 @@ class ProfileController extends Controller
             // Update the user profile
             $user = User::find(session('admin')->id);
 
+            $user->cover_photo = $validationData['image'];
             $user->username = (!empty($validationData['username'])) ? $validationData['username'] : $user->username;
             $user->email = (!empty($validationData['email'])) ? $validationData['email'] : $user->email;
             $user->gender = (!empty($validationData['gender'])) ? $validationData['gender'] : $user->gender;
@@ -52,7 +53,7 @@ class ProfileController extends Controller
             if (!empty($validationData['dob'])) {
                 $dates = explode(' ', $validationData['dob']);
                 $dates[1] = date('m', strtotime($dates[1]));
-                $user->dob = $dates[2].'-'.$dates[1].'-'.$dates[0];
+                $user->dob = $dates[2] . '-' . $dates[1] . '-' . $dates[0];
             }
             $user->save();
             session([
@@ -63,5 +64,17 @@ class ProfileController extends Controller
         }
 
         return redirect()->back()->withErrors($validationData);
+    }
+
+    public function updateImage(Request $request)
+    {
+        $user = User::find(session('admin')->id);
+        $user->cover_photo = $request->image;
+        $user->save();
+        session([
+            'admin' => $user,
+        ]);
+        return redirect()->back()->with('success', 'Update profile image successfully!');
+
     }
 }
