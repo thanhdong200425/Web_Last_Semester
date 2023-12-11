@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\UserController;
 use App\Models\Albumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/sign-in');
+Route::post('/sign-in', [UserController::class, 'sign_in'])->name('sign_in');
