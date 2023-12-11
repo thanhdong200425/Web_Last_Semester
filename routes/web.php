@@ -8,6 +8,7 @@ use App\Http\Controllers\SingerController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlbumnController;
+use App\Http\Controllers\SearchController;
 use App\Http\Middleware\CheckUserIsActive;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/edit/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::get('users/{username}', [UserController::class, 'show'])->name('users.show');
 
     // Create user routes
     Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
@@ -79,7 +81,7 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     Route::get('/profile/my', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile/my', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/my/update-image', [ProfileController::class, 'updateImage'])->name('profile.update-image');
-    
+
     // Search routes
-    
+    Route::get('/dashborad/search/', [SearchController::class, 'search'])->name('search');
 });

@@ -1,47 +1,56 @@
 @php
     $user = session('admin');
     $username = strtoupper($user['username']);
-    $cover_photo = (file_exists(public_path('uploads/' . $user->cover_photo))) ? asset('uploads/' . $user->cover_photo) : $cover_photo = $user->cover_photo;
+    $cover_photo = file_exists(public_path('uploads/' . $user->cover_photo)) ? asset('uploads/' . $user->cover_photo) : ($cover_photo = $user->cover_photo);
 @endphp
 <div class="header">
     <div class="header-left">
         <div class="menu-icon bi bi-list"></div>
         <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
         <div class="header-search">
-            <form>
-                <div class="form-group mb-0">
-                    <i class="dw dw-search2 search-icon"></i>
-                    <input type="text" class="form-control search-input" placeholder="Search Here" />
-                    <div class="dropdown">
-                        <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                            <i class="ion-arrow-down-c"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">From</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control form-control-sm form-control-line" type="text" />
-                                </div>
+            {{-- Search form --}}
+            <div class="form-group mb-0">
+                <i class="dw dw-search2 search-icon"></i>
+                <input type="text" class="form-control search-input" name="username" id="search" placeholder="Search Here" />
+                <div class="dropdown">
+                    <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                        <i class="ion-arrow-down-c"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">From</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm form-control-line" type="text" />
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">To</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control form-control-sm form-control-line" type="text" />
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">To</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm form-control-line" type="text" />
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control form-control-sm form-control-line" type="text" />
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm form-control-line" type="text" />
                             </div>
-                            <div class="text-right">
-                                <button class="btn btn-primary">Search</button>
-                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button class="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </div>
-            </form>
+                <table id="results" style="display: none" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="header-right">
@@ -130,7 +139,8 @@
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                     <span class="user-icon">
-                        <img src="{{ $cover_photo }}" style="width: 100%; height: 100%; object-fit: cover;" alt="" />
+                        <img src="{{ $cover_photo }}" style="width: 100%; height: 100%; object-fit: cover;"
+                            alt="" />
                     </span>
                     <span class="user-name">
                         {{ $username }}
@@ -145,3 +155,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#search").on('keyup', function() {
+        var query = $(this).val();
+        if (query.length == 0) {
+            $('#results').hide();
+            return;
+        }
+        
+        $.ajax({
+            url: "{{ route('search')}}",
+            type: 'GET',
+            data: {
+                'search': query
+            },
+            success: function(data) {
+                $('#results').html(data);
+                $('#results').show();
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+</script>

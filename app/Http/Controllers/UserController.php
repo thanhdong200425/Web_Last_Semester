@@ -11,7 +11,6 @@ class UserController extends Controller
     //
     public function index()
     {
-
         $userList = User::where('role', 1)->paginate(10);
         return view('pages.user-pages.users', [
             'userList' => $userList,
@@ -77,7 +76,7 @@ class UserController extends Controller
         if ($validateData) {
             $user = User::find($request->id);
             $user->fill($request->only('username', 'email', 'gender', 'country', 'dob', 'phone_number'));
-            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $user->cover_photo ;
+            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $user->cover_photo;
             $user->cover_photo = $nameFile;
             $user->save();
             return redirect()->route('users');
@@ -91,5 +90,14 @@ class UserController extends Controller
         $name = $urlImage->getClientOriginalName();
         $urlImage->move(public_path('uploads/'), $name);
         return $name;
+    }
+
+    public function show($username)
+    {
+        $user = User::where('username', $username)->first();
+//        dd($user->id);
+        return view('pages.user-pages.edit-user', [
+            'user' => $user
+        ]);
     }
 }

@@ -15,8 +15,6 @@ return new class extends Migration {
             $table->string('remember_token');
             $table->string('origin_password');
         });
-
-
     }
 
     /**
