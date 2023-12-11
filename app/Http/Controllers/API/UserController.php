@@ -19,6 +19,7 @@ class UserController extends Controller
             $user = DB::table('users')->where('username', "=", $request->username)->first();
             if ($user) {
                 return response()->json([
+                    'success' => true,
                     'message' => "OK",
                     'data' => $user
                 ],200);
