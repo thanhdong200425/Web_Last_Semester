@@ -85,12 +85,12 @@ class SingerController extends Controller
         return redirect()->route('singer.edit', ['singer_id' => $request->singer_id])->withErrors($validateData);
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        if (DB::table('singers')->where('singer_id', '=', $request->singer_id)->delete()) {
-            return redirect()->route('singers');
+        if (DB::table('singers')->where('singer_id', '=', $id)->delete()) {
+            return response()->json(['success' => 'Singer deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Delete failed!'], 500);
         }
-
-        return redirect()->route('singers')->withErrors('Delete failed!');
     }
 }

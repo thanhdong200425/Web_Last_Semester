@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('profile.update-image') }}" method="POST">
+                                            <form action="{{ route('profile.update-image') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="file" name="image" class="btn">

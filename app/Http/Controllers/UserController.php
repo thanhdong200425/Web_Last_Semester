@@ -48,11 +48,18 @@ class UserController extends Controller
         endif;
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $user = User::find($request->id);
-        $user->delete();
-        return redirect()->route('users');
+        if ($user = User::find($id)):
+            $user->delete();
+            return response()->json([
+                'message' => 'success',
+            ]);
+        endif;
+
+        return response()->json([
+            'message' => 'failed'
+        ]);
     }
 
     public function edit(Request $request)
@@ -95,7 +102,7 @@ class UserController extends Controller
     public function show($username)
     {
         $user = User::where('username', $username)->first();
-//        dd($user->id);
+        //        dd($user->id);
         return view('pages.user-pages.edit-user', [
             'user' => $user
         ]);

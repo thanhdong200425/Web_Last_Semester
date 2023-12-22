@@ -22,15 +22,17 @@ class UserController extends Controller
                     'success' => true,
                     'message' => "OK",
                     'data' => $user
-                ],200);
+                ], 200);
             }
 
             return response()->json([
+                'success' => false,
                 'message' => 'User not found'
             ], 404);
         }
 
         return response()->json([
+            'success' => false,
             'message' => $validationData
         ], 404);
     }

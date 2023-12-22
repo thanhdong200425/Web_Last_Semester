@@ -68,7 +68,7 @@
                     $id = ($currentPage - 1) * $itemPerPage + 1;
                 @endphp
                 @foreach ($singers as $singer)
-                    <tr>
+                    <tr id="item-{{$singer->singer_id}}">
                         <td>{{ $id++ }}</td>
                         <td>
                             @php
@@ -84,16 +84,23 @@
                         <td>{{ $singer->created_at }}</td>
                         <td class="button-container">
                             {{-- Customize the interface --}}
-                            <a href="{{ route('singer.edit', ['singer_id' => $singer->singer_id]) }}" class="btn btn-outline-primary btn-sm ">
+                            <a href="{{ route('singer.edit', ['singer_id' => $singer->singer_id]) }}"
+                                class="btn btn-outline-primary btn-sm ">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form id="singer_{{ $singer->singer_id }}" action="{{ route('singer.delete', ['singer_id' => $singer->singer_id]) }}" method="POST">
+
+                            <a class="btn btn-outline-danger btn-sm delete-button" data-id="{{$singer->singer_id}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            {{-- <form id="singer_{{ $singer->singer_id }}"
+                                action="{{ route('singer.delete', ['singer_id' => $singer->singer_id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-outline-danger btn-sm" onclick="document.getElementById('singer_{{ $singer->singer_id }}').submit();">
+                                <a class="btn btn-outline-danger btn-sm"
+                                    onclick="document.getElementById('singer_{{ $singer->singer_id }}').submit();">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                            </form>
+                            </form> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -103,5 +110,21 @@
             {{ $singers->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
+
+    <script>
+        $('.delete-button').click(function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/admin/singers/delete/' + id,
+                method: 'DELETE',
+                data: {
+                    "_token": "{{csrf_token()}}"
+                },
+                success: function(response) {
+                    $('#item-'+id).remove();
+                }
+            });
+        });
+    </script>
 
 @endsection

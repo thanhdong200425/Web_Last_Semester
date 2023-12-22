@@ -16,7 +16,7 @@
                     <th class="datatable-nosort">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="user-list">
                 @php
                     // Null coalescing operator (??) has been added in PHP 7.0 as an alternative to the ternary operator.
                     $currentPage = \Illuminate\Pagination\Paginator::resolveCurrentPage() ?? 1;
@@ -24,7 +24,7 @@
                     $id = ($currentPage - 1) * $itemsPerPage + 1;
                 @endphp
                 @foreach ($userList as $user)
-                    <tr>
+                    <tr id="{{ 'item-'. $user->id }}">
                         <td>{{ $id++ }}</td>
                         <td class="table-plus">
                             <div class="name-avatar d-flex align-items-center">
@@ -61,15 +61,20 @@
                             <div class="table-actions">
                                 <a href="{{ route('users.edit', ['id' => $user->id]) }}" data-color="#265ed7"><i
                                         class="icon-copy dw dw-edit2"></i> </a>
-                                <form id="user_{{$user->id}}" action="{{ route('users.destroy', ['id' => $user->id]) }}"
-                                    method="POST">
+                                <a data-color="#e95959" style="cursor: pointer;" class="ml-2 delete-button"
+                                    data-id="{{ $user->id }}">
+                                    <i class="icon-copy dw dw-delete-3"></i>
+                                </a>
+                                {{-- <form id="user_{{ $user->id }}"
+                                    action="{{ route('users.destroy', ['id' => $user->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a data-color="#e95959" onclick="document.getElementById('user_{{$user->id}}').submit()"
+                                    <a data-color="#e95959"
+                                        onclick="document.getElementById('user_{{ $user->id }}').submit()"
                                         style="cursor: pointer;" class="ml-2">
                                         <i class="icon-copy dw dw-delete-3"></i>
                                     </a>
-                                </form>
+                                </form> --}}
                             </div>
                         </td>
                     </tr>
@@ -83,4 +88,23 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.delete-button').click(function() {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: '/admin/users/delete/' + id,
+                type: 'DELETE',
+                data: {
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    $('#item-' + id).remove();
+                },
+                error: function(response) {
+                    alert(response.message);
+                }
+            });
+        });
+    </script>
 @endsection

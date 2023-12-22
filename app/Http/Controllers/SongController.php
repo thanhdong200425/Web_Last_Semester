@@ -23,9 +23,13 @@ class SongController extends Controller
         $song = Song::find($song_id);
         if ($song):
             $song->delete();
-            return redirect()->route('songs');
+            return response()->json([
+                'message' => 'success'
+            ]);
         endif;
-        return redirect()->route('songs')->withErrors(['Song not found']);
+        return response()->json([
+            'message' => 'failed'
+        ], 404);
     }
 
     public function edit(Request $request)

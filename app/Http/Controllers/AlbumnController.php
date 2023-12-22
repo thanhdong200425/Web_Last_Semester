@@ -21,9 +21,13 @@ class AlbumnController extends Controller
         $albumn = Albumn::find($request->albumn_id);
         if (!empty($albumn)) {
             $albumn->delete();
-            return redirect()->route('albumns');
+            return response()->json([
+                'message' => 'success'
+            ]);
         }
-        return redirect()->route('albumns')->withErrors('Albumn not found');
+        return response()->json([
+            'message' => 'falied'
+        ], 404);
     }
 
     public function update(Request $request)

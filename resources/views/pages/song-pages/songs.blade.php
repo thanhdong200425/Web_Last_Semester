@@ -79,7 +79,7 @@
                     $id = ($currentPage - 1) * $itemPerPage + 1;
                 @endphp
                 @foreach ($songs as $song)
-                    <tr>
+                    <tr id="item-{{$song->song_id}}">
                         <td>{{ $id++ }}</td>
                         <td>{{ $song->song_name }}</td>
                         <td class="small-text">{{ $song->created_at }}</td>
@@ -87,7 +87,7 @@
                         <td>
                             @php
                                 $nameFile = file_exists(public_path('uploads/' . $song->cover_photo)) ? asset('uploads/' . $song->cover_photo) : $song->cover_photo;
-                                
+
                             @endphp
                             <img src="{{ $nameFile }}" alt="Cover Photo" style="max-width: 50px;">
                         </td>
@@ -103,7 +103,12 @@
                                     <span class="micon bi bi-pencil"></span>
                                     <span class="mtext">Edit</span>
                                 </a>
-                                <form id="song_{{ $song->song_id }}" action="{{ route('song.destroy', $song->song_id) }}"
+
+                                <a class="delete-button" data-id="{{ $song->song_id }}">
+                                    <span class="micon bi bi-trash3"></span>
+                                    <span class="mtext">Delete</span>
+                                </a>
+                                {{-- <form id="song_{{ $song->song_id }}" action="{{ route('song.destroy', $song->song_id) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -111,7 +116,7 @@
                                         <span class="micon bi bi-trash3"></span>
                                         <span class="mtext">Delete</span>
                                     </a>
-                                </form>
+                                </form> --}}
                             </div>
                         </td>
                     </tr>
@@ -129,5 +134,19 @@
             var dropdown = element.querySelector('.actions-dropdown');
             dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
         }
+
+        $('.delete-button').click(function() {
+            var id = $(this).data('id');
+            $.ajax({
+                type: "DELETE",
+                url: "/admin/songs/delete/" + id,
+                data: {
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    $('#item-' + id).remove();
+                }
+            });
+        });
     </script>
 @endsection

@@ -113,7 +113,7 @@
                 </thead>
                 <tbody>
                     @foreach ($singersList as $singer)
-                        <tr>
+                        <tr id="items-{{ $singer->singer_id }}">
                             <td class="table-plus">
                                 <div class="name-avatar d-flex align-items-center">
                                     {{-- Avatar --}}
@@ -141,7 +141,11 @@
                             <td>
                                 <div class="table-actions">
                                     <a href="#" data-color="#265ed7"><i class="icon-copy dw dw-edit2"></i></a>
-                                    <form id="deleteSinger{{ $singer->singer_id }}"
+                                    <a class="ml-2 delete-button" style="cursor: pointer" data-color="#e95959" data-id="{{ $singer->singer_id }}"> 
+                                        <i class="icon-copy dw dw-delete-3"></i>
+                                    </a>
+
+                                    {{-- <form id="deleteSinger{{ $singer->singer_id }}"
                                         action="{{ route('dashboard.delete-singer', ['singer_id' => $singer->singer_id]) }}"
                                         method="post">
                                         @csrf
@@ -150,7 +154,7 @@
                                             onclick="event.preventDefault(); document.getElementById('deleteSinger{{ $singer->singer_id }}').submit();">
                                             <i class="icon-copy dw dw-delete-3"></i>
                                         </a>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </td>
                         </tr>
@@ -170,6 +174,25 @@
         {{-- End of Row --}}
     </div>
     {{-- End of Overview --}}
+    <script>
+        $('.delete-button').click(function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/admin/singers/delete/' + id,
+                type: 'DELETE',
+                data: {
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    $('#items-' + id).remove();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Delete failed: ' + jqXHR.responseText + " " + errorThrown);
+                }
+            })
+            return false;
+        })
+    </script>
 
-    
+
 @endsection

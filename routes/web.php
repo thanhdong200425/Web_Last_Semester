@@ -67,7 +67,6 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     Route::get('/albumns/create', [AlbumnController::class, 'create'])->name('albumn.create');
     Route::post('/albumns/create', [AlbumnController::class, 'store'])->name('albumn.store');
 
-
     // Manage albums routes
     Route::get('/albumns', [AlbumnController::class, 'index'])->name('albumns');
     Route::delete('/albumns/delete/{albumn_id}', [AlbumnController::class, 'destroy'])->name('albumn.delete');
@@ -83,5 +82,5 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     Route::put('/profile/my/update-image', [ProfileController::class, 'updateImage'])->name('profile.update-image');
 
     // Search routes
-    Route::get('/dashborad/search/', [SearchController::class, 'search'])->name('search');
+    Route::get('/dashboard/search/', [SearchController::class, 'search'])->name('search');
 });

@@ -37,7 +37,6 @@ class ProfileController extends Controller
             // Update the user profile
             $user = User::find(session('admin')->id);
 
-            $user->cover_photo = $validationData['image'];
             $user->username = (!empty($validationData['username'])) ? $validationData['username'] : $user->username;
             $user->email = (!empty($validationData['email'])) ? $validationData['email'] : $user->email;
             $user->gender = (!empty($validationData['gender'])) ? $validationData['gender'] : $user->gender;
@@ -69,8 +68,10 @@ class ProfileController extends Controller
     public function updateImage(Request $request)
     {
         $user = User::find(session('admin')->id);
-        $user->cover_photo = $request->image;
+        $image = UserController::handleImage($request->image);
+        $user->cover_photo = $image;
         $user->save();
+        
         session([
             'admin' => $user,
         ]);
