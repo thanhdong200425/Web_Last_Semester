@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -18,8 +19,8 @@ class UserController extends Controller
             ->where('role', '=', 1)
             ->first();
 
-        if ($data != null) :
-            if (Hash::check($request->password, $data->password)) :
+        if ($data != null):
+            if (Hash::check($request->password, $data->password)):
                 return response()->json([
                     'status' => true,
                     'data' => User::find($data->id)
@@ -40,17 +41,16 @@ class UserController extends Controller
     public function sign_up(Request $request): JsonResponse
     {
         $data = DB::table('users')->insert([
-            'username' => $request->username, 
-            'password' => Hash::make($request->password), 
-            'origin_password' => $request->password, 
-            'email' => $request->email, 
-            'role' => 1, 
-            'is_active' => 1
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'origin_password' => $request->password,
+            'email' => $request->email,
+            'role' => 1,
+            'is_active' => 1,
+            'remember_token' => Str::random(60)
         ]);
         if ($data) {
             return response()->json(['status' => true]);
         }
-
-        
     }
 }
