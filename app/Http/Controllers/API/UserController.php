@@ -75,7 +75,7 @@ class UserController extends Controller
 
         if ($user) {
 
-            $user->fill($request->only('username', 'email', 'phone_number', 'gender', 'country', 'dob','cover_photo'));
+            $user->fill($request->only('username', 'email','cover_photo', 'phone_number', 'gender', 'country', 'dob'));
             $user->save();
             return response()->json([
                 'status' => true,
