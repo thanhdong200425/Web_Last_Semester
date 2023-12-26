@@ -19,8 +19,8 @@ class UserController extends Controller
             ->where('role', '=', 1)
             ->first();
 
-        if ($data != null):
-            if (Hash::check($request->password, $data->password)):
+        if ($data != null) :
+            if (Hash::check($request->password, $data->password)) :
                 return response()->json([
                     'status' => true,
                     'data' => User::find($data->id)
@@ -51,13 +51,12 @@ class UserController extends Controller
         ]);
         if ($data) {
             return response()->json([
-                'status' => true,
-                'message' => 'Đăng ký thành công'
+                'status' => true
             ]);
         }
 
         return response()->json([
-            'status'=>false
+            'status' => false
         ]);
     }
 
@@ -66,8 +65,26 @@ class UserController extends Controller
         $request->session()->forget('username');
 
         return response()->json([
-            'status' => true,
-            'message' => 'Đăng xuất thành công'
+            'status' => true
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            
+            $user->fill($request->only('username', 'email', 'phone_number', 'gender', 'country', 'dob'));
+            return response()->json([
+                'status' => true,
+                'data' => $user
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'data' => null
         ]);
     }
 }

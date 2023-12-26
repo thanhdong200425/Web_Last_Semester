@@ -26,6 +26,8 @@ Route::post('/sign_up', [UserController::class, 'sign_up'])->name('sign_up');
 
 Route::post('/sign_out', [UserController::class, 'sign_out'])->name('sign_out');
 
+Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+
 Route::prefix('user')->group(function () {
 
 });
