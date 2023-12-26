@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Song;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -56,11 +57,12 @@ class UserController extends Controller
             'remember_token' => Str::random(60)
         ]);
         if ($data) {
-            return response()->json(['status' => true]);
+            return response()->json(['status' => true
+        ]);
         }
 
         return response()->json([
-            'status'=>false
+            'status' => false
         ]);
     }
 }

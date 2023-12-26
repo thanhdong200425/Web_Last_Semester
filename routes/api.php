@@ -24,6 +24,8 @@ Route::post('/', [UserController::class, 'sign_in'])->name('sign_in');
 
 Route::post('/sign_up', [UserController::class, 'sign_up']);
 
+Route::get('/songs', [UserController::class, 'get']);
+
 Route::prefix('user')->group(function () {
 
 });
