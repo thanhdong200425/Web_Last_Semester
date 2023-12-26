@@ -52,7 +52,5 @@ class UserController extends Controller
         if ($data) {
             return response()->json(['status' => true]);
         }
-
-        
     }
 }
