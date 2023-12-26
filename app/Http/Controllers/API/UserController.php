@@ -14,6 +14,7 @@ class UserController extends Controller
 {
     public function sign_in(Request $request): JsonResponse
     {
+        // cookie
         $data = DB::table('users')
             ->where('username', '=', $request->username)
             ->where('role', '=', 1)
@@ -62,7 +63,8 @@ class UserController extends Controller
 
     public function sign_out(Request $request)
     {
-        $request->session()->forget('username');
+        // $request->session()->forget('username');
+        // cookie
 
         return response()->json([
             'status' => true

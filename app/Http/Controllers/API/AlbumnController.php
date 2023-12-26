@@ -46,12 +46,7 @@ class AlbumnController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $albumn = Albumn::find($id);
-
-        if($albumn) {
-            $albumn->albumn_name = $request->albumn_name;
-
-        }
+        
     }
 
     /**
