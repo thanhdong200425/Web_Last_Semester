@@ -74,8 +74,9 @@ class UserController extends Controller
         $user = User::find($id);
 
         if ($user) {
-            
+
             $user->fill($request->only('username', 'email', 'phone_number', 'gender', 'country', 'dob'));
+            $user->save();
             return response()->json([
                 'status' => true,
                 'data' => $user
