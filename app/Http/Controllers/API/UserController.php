@@ -50,11 +50,24 @@ class UserController extends Controller
             'remember_token' => Str::random(60)
         ]);
         if ($data) {
-            return response()->json(['status' => true]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Đăng ký thành công'
+            ]);
         }
 
         return response()->json([
             'status'=>false
+        ]);
+    }
+
+    public function sign_out(Request $request)
+    {
+        $request->session()->forget('username');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Đăng xuất thành công'
         ]);
     }
 }
