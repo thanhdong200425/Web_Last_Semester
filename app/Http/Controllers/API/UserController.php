@@ -3,37 +3,36 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function sign_in(Request $request)
     {
-        $validationData = $request->validate([
-            'username' => ['required'],
-            'password' => ['required']
-        ]);
-
-        if ($validationData) {
-            $user = DB::table('users')->where('username', "=", $request->username)->first();
-            if ($user) {
+        $data = DB::table('users')
+            ->where('username', '=', $request->username)
+            ->where('role', '=', 1)
+            ->first();
+        if ($data != null):
+            if (Hash::check($request->password, $data->password)):
                 return response()->json([
-                    'success' => true,
-                    'message' => "OK",
-                    'data' => $user
-                ], 200);
-            }
-
+                    'status' => true,
+                    'data' => User::find($data->id)
+                ]);
+            endif;
             return response()->json([
-                'success' => false,
-                'message' => 'User not found'
-            ], 404);
-        }
+                'status' => false,
+                'data' => []
+            ]);
+        endif;
 
         return response()->json([
-            'success' => false,
-            'message' => $validationData
-        ], 404);
+            'status' => false,
+            'data' => []
+        ]);
     }
+
 }

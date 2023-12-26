@@ -30,6 +30,15 @@ class User extends Authenticatable
         'origin_password',
     ];
 
+    protected $hidden = [
+        'password',
+        'origin_password',
+        'remember_token',
+        'refresh_token',
+        'is_active',
+        
+    ];
+
     public static function authenticateUser($username, $origin_password): bool|User
     {
         $user = User::where('username', $username)->first();

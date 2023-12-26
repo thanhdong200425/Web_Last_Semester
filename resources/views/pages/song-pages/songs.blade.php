@@ -78,20 +78,20 @@
                     $itemPerPage = 5;
                     $id = ($currentPage - 1) * $itemPerPage + 1;
                 @endphp
-                @foreach ($songs as $song)
-                    <tr id="item-{{$song->song_id}}">
+                @foreach ($data as $item)
+                    <tr id="item-{{$item->song_id}}">
                         <td>{{ $id++ }}</td>
-                        <td>{{ $song->song_name }}</td>
-                        <td class="small-text">{{ $song->created_at }}</td>
-                        <td class="small-text">{{ $song->updated_at }}</td>
+                        <td>{{ $item->song_name }}</td>
+                        <td class="small-text">{{ $item->created_at }}</td>
+                        <td class="small-text">{{ $item->updated_at }}</td>
                         <td>
                             @php
-                                $nameFile = file_exists(public_path('uploads/' . $song->cover_photo)) ? asset('uploads/' . $song->cover_photo) : $song->cover_photo;
+                                $nameFile = file_exists(public_path('uploads/' . $item->cover_photo)) ? asset('uploads/' . $item->cover_photo) : $item->cover_photo;
 
                             @endphp
                             <img src="{{ $nameFile }}" alt="Cover Photo" style="max-width: 50px;">
                         </td>
-                        <td>Singer A</td>
+                        <td>{{ $item->singer_name }}</td>
                         <td class="actions" onclick="toggleDropdown(this)">
                             ...
                             <div class="actions-dropdown">
@@ -99,12 +99,12 @@
                                     <span class="micon bi bi-eye"></span>
                                     <span class="mtext">View</span>
                                 </a>
-                                <a href="{{ route('song.edit', ['song_id' => $song->song_id]) }}">
+                                <a href="{{ route('song.edit', ['song_id' => $item->song_id]) }}">
                                     <span class="micon bi bi-pencil"></span>
                                     <span class="mtext">Edit</span>
                                 </a>
 
-                                <a class="delete-button" data-id="{{ $song->song_id }}">
+                                <a class="delete-button" data-id="{{ $item->song_id }}">
                                     <span class="micon bi bi-trash3"></span>
                                     <span class="mtext">Delete</span>
                                 </a>
@@ -125,7 +125,7 @@
         </table>
         <div class="row">
             <div class="col-sm-12 col-md-7 col-lg-12 col-xl-12 d-flex justify-content-center">
-                {{ $songs->links('vendor.pagination.bootstrap-4') }}
+                {{ $data->links('vendor.pagination.bootstrap-4') }}
             </div>
         </div>
     </div>

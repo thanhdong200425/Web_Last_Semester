@@ -12,9 +12,14 @@ class SongController extends Controller
 {
     public function index()
     {
-        $songs = Song::paginate(5);
+        $data = DB::table('song_singers')
+            ->join('singers', 'song_singers.singer_id', '=', 'singers.singer_id')
+            ->join('songs', 'song_singers.song_id', '=', 'songs.song_id')
+            ->select('songs.*', 'singers.*')
+            ->paginate(5);
+
         return view('pages.song-pages.songs', [
-            'songs' => $songs
+            'data' => $data
         ]);
     }
 
