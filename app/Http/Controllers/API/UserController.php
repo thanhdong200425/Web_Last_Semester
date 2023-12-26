@@ -21,9 +21,12 @@ class UserController extends Controller
 
         if ($data != null):
             if (Hash::check($request->password, $data->password)):
-                DB::table('users')->update([
-                    'access_token' => Hash::make($request->username)
+                $accessToken = encrypt($request->username);
+                DB::table('users')->where('username', '=', $request->username)->update([
+                    'access_token' => $accessToken
                 ]);
+                // Decryption username
+                // dd(decrypt($accessToken));
                 return response()->json([
                     'status' => true,
                     'data' => User::find($data->id)
