@@ -2,3 +2,7 @@
     -) Route: http://127.0.0.1:8000/api/
     -) Input: 'username' and 'password'
     -) Method: POST
+
++) Sign-up
+    -) Route: http://127.0.0.1:8000/api/
+    -) Input: 
