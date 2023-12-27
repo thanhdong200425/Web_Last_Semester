@@ -16,7 +16,7 @@ class AlbumnController extends Controller
     {
         $albumns = DB::table('albumn_singers')
             ->join('albumns', 'albumns.albumn_id', '=', 'albumn_singers.albumn_id')
-            ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
+            ->join('singers', 'singers.singer_id', '=', 'albumn_singers.singer_id')
             ->select('albumns.albumn_name', 'singers.singer_name', 'albumns.cover_photo')
             ->get();
         if ($albumns) {
