@@ -20,7 +20,7 @@ class AlbumnController extends Controller
             ->join('singers', 'singers.singer_id', '=', 'albumn_singers.singer_id')
             ->select('albumns.albumn_name', 'singers.singer_name', 'albumns.cover_photo')
             ->get();
-        if ($albumns) {
+        if ($albumns->count()) {
             return response()->json([
                 'status' => true,
                 'data' => $albumns
@@ -116,20 +116,40 @@ class AlbumnController extends Controller
     /**
      * Store songs to albumn
      */
-    // public function addSong($song_id, $albumn_id)
-    // {
-    //     $albumn = Albumn::find($albumn_id);
-    //     if ($albumn) {
-    //         $song = Song::find($song_id);
-    //         if ($song) {
-    //             $albumn_song = DB::table('albumn_songs')->insert([
-    //                 'song_id' => $song_id,
-    //                 'albumn_id' => $albumn_id
-    //             ]);
-                
-    //         }
-    //     }
-    // }
+    public function addSong($song_id, $albumn_id)
+    {
+        $albumn = Albumn::find($albumn_id);
+        if ($albumn) {
+
+            // Chọn song muốn thêm vào albumn
+            $song = Song::find($song_id);
+            if ($song) {
+                $albumn_song = DB::table('albumn_songs')->insert([
+                    'song_id' => $song_id,
+                    'albumn_id' => $albumn_id
+                ]);
+                return response()->json([
+                    'status' => true,
+                    'data' => $albumn_song
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'data' => null
+                ]);
+            }
+
+            return response()->json([
+                'status' => true,
+                'data' => $albumn->count()
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'data' => null
+        ]);
+    }
     /**
      * Update the specified albumns in storage.
      */
