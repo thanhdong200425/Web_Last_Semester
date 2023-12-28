@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Albumn;
+use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -92,10 +93,43 @@ class AlbumnController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // Tạo albumn
+        $albumn = DB::table('albumns')->insert([
+            'albumn_name' => $request->albumn_name,
+            'cover_photo' => $request->cover_photo,
+            'short_description' => $request->short_description
+        ]);
+
+        if ($albumn) {
+            return response()->json([
+                'status' => true,
+                'data' => $albumn
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'data' => null
+        ]);
     }
 
-
+    /**
+     * Store songs to albumn
+     */
+    // public function addSong($song_id, $albumn_id)
+    // {
+    //     $albumn = Albumn::find($albumn_id);
+    //     if ($albumn) {
+    //         $song = Song::find($song_id);
+    //         if ($song) {
+    //             $albumn_song = DB::table('albumn_songs')->insert([
+    //                 'song_id' => $song_id,
+    //                 'albumn_id' => $albumn_id
+    //             ]);
+                
+    //         }
+    //     }
+    // }
     /**
      * Update the specified albumns in storage.
      */

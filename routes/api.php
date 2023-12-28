@@ -41,6 +41,8 @@ Route::get('/albumn/{id}', [AlbumnController::class, 'show'])->name('albumn.show
 
 Route::get('/create_albumn', [AlbumnController::class, 'store'])->name('albumn.store');
 
+Route::get('/api/user/{albumn_id}', [AlbumnController::class, 'addSong'])->name('albumn.addSong');
+
 Route::put('/update_albumn/{id}', [AlbumnController::class, 'update'])->name('albumn.update');
 
 Route::delete('/delete_albumn/{id}', [AlbumnController::class, 'destroy'])->name('albumn.destroy');
