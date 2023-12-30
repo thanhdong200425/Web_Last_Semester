@@ -13,6 +13,7 @@ class Song extends Model
         'song_name',
         'lyric',
         'cover_photo',
-        'duration'
+        'duration',
+        'path'
     ];
 }

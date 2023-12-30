@@ -5,85 +5,86 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Albumn;
 use App\Models\Song;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AlbumnController extends Controller
 {
-    /**
-     * Display a listing of the albumns.
-     */
-    public function index()
+    public function index(): JsonResponse
     {
-        $albumns = DB::table('albumn_singers')
-            ->join('albumns', 'albumns.albumn_id', '=', 'albumn_singers.albumn_id')
-            ->join('singers', 'singers.singer_id', '=', 'albumn_singers.singer_id')
-            ->select('albumns.albumn_name', 'singers.singer_name', 'albumns.cover_photo')
-            ->get();
-        if ($albumns->count()) {
+        $albumns = DB::table('albumn_songs')
+            ->join('albumns', 'albumns.albumn_id', '=', 'albumn_songs.albumn_id')
+            ->join('songs', 'songs.song_id', '=', 'albumn_songs.song_id')
+            ->join('song_singers', 'song_singers.song_id', '=', 'songs.song_id')
+            ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
+            ->get(['songs.song_name', 'singers.singer_name', 'songs.path', 'songs.cover_photo', 'albumns.albumn_name',
+                'albumns.albumn_id', 'albumns.cover_photo']);
+
+        if ($albumns->isNotEmpty()):
+            $result = $albumns->groupBy('albumn_id')->map(function ($group) {
+                return [
+                    "albumn_name" => $group->first()->albumn_name,
+                    "albumn_photo" => $group->first()->cover_photo,
+                    "songs" => $group->groupBy("song_name")->map(function ($items) {
+                        $song_name = $items->first()->song_name;
+                        $cover_photo = DB::table('songs')->where('song_name', '=', $song_name)->value('cover_photo');
+                        return [
+                            "cover_photo" => $cover_photo,
+                            "path" => $items->first()->path,
+                            "singers" => $items->pluck('singer_name')->toArray()
+                        ];
+                    })
+                ];
+            });
+
             return response()->json([
-                'status' => true,
-                'data' => $albumns
+                "status" => true,
+                "data" => $result
             ]);
-        }
+        endif;
 
         return response()->json([
-            'status' => false,
-            'data' => null
+            "status" => false,
+            "data" => null
         ]);
     }
 
-    /**
-     * Display the specified albumn.
-     */
-    public function show($id)
+    public function show($albumn_id): JsonResponse
     {
-        $albumn = Albumn::find($id);
+        $albumn = Albumn::find($albumn_id);
 
         if ($albumn) {
-
-            // Truy xuất những bài hát có trong Albumn
             $songs = DB::table('albumn_songs')
+                ->where('albumn_songs.albumn_id', '=', $albumn_id)
                 ->join('songs', 'songs.song_id', '=', 'albumn_songs.song_id')
-                ->where('albumn_songs.albumn_id', '=', $albumn)
-                ->select('songs.*')
-                ->get();
+                ->join('song_singers', 'song_singers.song_id', '=', 'songs.song_id')
+                ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
+                ->join('albumns', 'albumns.albumn_id', '=', 'albumn_songs.albumn_id')
+                ->get(['songs.song_name', 'singers.singer_name', 'songs.path', 'albumns.albumn_name']);
 
-            // Truy xuất những ca sĩ có trong Albumn
-            $singers = DB::table('albumn_singers')
-                ->join('singers', 'singers.singer_id', '=', 'albumn_singers.singer_id')
-                ->where('albumn_singers.albumn_id', '=', $albumn)
-                ->select('singers.*')
-                ->get();
 
-            // Truy xuất những ca sĩ có trong bài hát của Albumn
-            $song_singers = [];
-            foreach ($songs as $song) {
-                $singers = DB::table('song_singers')
-                    ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
-                    ->where('song_singers.song_id', '=', $song->song_id)
-                    ->select('singers.*')
-                    ->get();
-                $song_singers[$song->song_id] = $singers;
-            }
+            if ($songs->isNotEmpty()):
+                $albumn_name = $songs->first()->albumn_name;
+                $result[$albumn_name] = [];
+                $result[$albumn_name] = $songs->groupBy("song_name")->map(function ($songGroup) {
+                    return [
+                        "song_name" => $songGroup->first()->song_name,
+                        "singers" => $songGroup->pluck("singer_name")->toArray(),
+                        "path" => $songGroup->first()->path
+                    ];
+                })->values();
 
-            // data
-            $data = [
-                'albumn' => $albumn,
-                'songs' => $songs,
-                'singers' => $singers,
-                'song_singers' => $song_singers
-            ];
-
-            return response()->json([
-                'status' => true,
-                'data' => $data
-            ]);
+                return response()->json([
+                    "status" => true,
+                    "data" => $result
+                ]);
+            endif;
         }
 
         return response()->json([
-            'status' => false,
-            'data' => null
+            "status" => false,
+            "data" => null
         ]);
     }
 
@@ -113,41 +114,26 @@ class AlbumnController extends Controller
         ]);
     }
 
-    /**
-     * Store songs to albumn
-     */
-    public function addSong($song_id, $albumn_id)
+    public function addSong($albumn_id, Request $request): JsonResponse
     {
         $albumn = Albumn::find($albumn_id);
-        if ($albumn) {
-
-            // Chọn song muốn thêm vào albumn
-            $song = Song::find($song_id);
-            if ($song) {
+        if (isset($albumn)) {
+            $song = Song::find($request->song_id);
+            if (isset($song)) {
                 $albumn_song = DB::table('albumn_songs')->insert([
-                    'song_id' => $song_id,
+                    'song_id' => $request->song_id,
                     'albumn_id' => $albumn_id
                 ]);
-                return response()->json([
-                    'status' => true,
-                    'data' => $albumn_song
-                ]);
-            } else {
-                return response()->json([
-                    'status' => false,
-                    'data' => null
-                ]);
+                if ($albumn_song) {
+                    return response()->json([
+                        "status" => true
+                    ]);
+                }
             }
-
-            return response()->json([
-                'status' => true,
-                'data' => $albumn->count()
-            ]);
         }
 
         return response()->json([
             'status' => false,
-            'data' => null
         ]);
     }
     /**

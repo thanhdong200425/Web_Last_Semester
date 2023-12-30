@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             SingerSeeder::class,
             SongSeeder::class,
             TypeOfSongSeeder::class,
+            AlbumnSingerSeeder::class,
+            AlbumnSongSeeder::class,
+            SongSingerSeeder::class,
         ]);
     }
 }

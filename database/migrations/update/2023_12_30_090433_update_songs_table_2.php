@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::table('songs', function(Blueprint $table){
-            $table->string('duration')->nullable();
+        Schema::table('songs', function (Blueprint $table) {
+            $table->text('path')->nullable();
         });
     }
 
@@ -22,9 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        Schema::table('songs', function(Blueprint $table){
-            $table->dropColumn('duration');
-        });
+        Schema::dropColumns('songs', 'path');
     }
 };
