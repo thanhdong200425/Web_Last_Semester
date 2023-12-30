@@ -12,6 +12,7 @@ class Albumn extends Model
     protected $fillable = [
         'albumn_name',
         'number_songs', 
-        'short_description'
+        'short_description',
+        'cover_photo'
     ];
 }

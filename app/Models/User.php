@@ -28,6 +28,7 @@ class User extends Authenticatable
         'youtube',
         'remember_token',
         'origin_password',
+        'cover_photo'
     ];
 
     protected $hidden = [

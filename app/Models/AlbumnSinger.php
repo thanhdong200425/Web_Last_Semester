@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Song extends Model
+class AlbumnSinger extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'song_id';
+
+    protected $table = "albumn_singers";
     protected $fillable = [
-        'song_name',
-        'lyric',
-        'cover_photo',
-        'duration',
-        'path'
+        'albumn_id',
+        'singer_id'
     ];
+
+    public $timestamps = false;
 }

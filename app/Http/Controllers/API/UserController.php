@@ -22,12 +22,6 @@ class UserController extends Controller
 
         if ($data != null):
             if (Hash::check($request->password, $data->password)):
-                $accessToken = encrypt($request->username);
-                DB::table('users')->where('username', '=', $request->username)->update([
-                    'access_token' => $accessToken
-                ]);
-                // Decryption username
-                // dd(decrypt($accessToken));
                 return response()->json([
                     'status' => true,
                     'data' => User::find($data->id)
@@ -57,12 +51,11 @@ class UserController extends Controller
             'remember_token' => Str::random(60)
         ]);
         if ($data) {
-            return response()->json(['status' => true
-        ]);
+            return response()->json(['status' => true]);
         }
 
         return response()->json([
-            'status' => false
+            'status'=>false
         ]);
     }
 }

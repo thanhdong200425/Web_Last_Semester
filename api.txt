@@ -3,6 +3,27 @@
     -) Input: 'username' and 'password'
     -) Method: POST
 
-+) Sign-up
++) Sign-up (Not complete)
     -) Route: http://127.0.0.1:8000/api/
     -) Input: 
+
+/* --------------Albumn------------------ */
+
++) Add exist song into an albumn
+    -) Route: http://127.0.0.1:8000/api/albumn/{albumn_id}/add_song
+    -) Input: "song_id"
+    -) Method: POST
+
++) Get all the information of an albumn that include "songs", "singers", "albumn name" and "path"
+    -) Route: http://127.0.0.1:8000/api/albumn/{albumn_id}
+    -) Input: none
+    -) Method: GET
+
++) Get all the information of all albumns that include "songs", "singers", "albumn name" and "path"
+    -) Route: http://127.0.0.1:8000/api/albumn/
+    -) Input: none
+    -) Method: GET
+
++) Update information of an albumn (Not completed)
+    -) Route: http://127.0.0.1:8000/api/albumn/{albumn_id}
+    
