@@ -34,9 +34,9 @@ class AlbumnController extends Controller
                             "path" => $items->first()->path,
                             "singers" => $items->pluck('singer_name')->toArray()
                         ];
-                    })
+                    })->values()
                 ];
-            });
+            })->values();
 
             return response()->json([
                 "status" => true,
