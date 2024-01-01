@@ -95,7 +95,7 @@
                         <td class="actions" onclick="toggleDropdown(this)">
                             ...
                             <div class="actions-dropdown">
-                                <a href="#" class="play_button">
+                                <a href="#" class="play_button" data-path="{{ $item->path}}">
                                     <i class="bi bi-play-circle"></i>
                                     <span class="mtext">Play</span>
                                 </a>
@@ -145,10 +145,11 @@
         });
 
         $('.play_button').on('click', function(event) {
+            var path = $(this).data('path');
             $(this).hide();
             $('#music_player').show();
             $('.pause_button').show();
-            $('#play-button').show();
+            $('#play-button').attr('data-path', path).show();
             $('#pause-button').hide();
         });
 

@@ -39,7 +39,7 @@ Route::prefix('/user/{id}')->group(function () {
 
 Route::prefix('/albumn')->group(function () {
 
-    // Get all the information of an albumn that include "songs", "singers", "albumn name" 
+    // Get all the information of all albumns that include "songs", "singers", "albumn name" 
     Route::get('/', [AlbumnController::class, 'index']);
 
     // Add exist song into an albumn

@@ -41,7 +41,7 @@
                     <i class="bi bi-skip-backward-circle text-white font-bigger"></i>
                 </button>
                 <button class="btn btn-outline-dark border border-0">
-                    <i class="bi bi-play-circle-fill text-white font-bigger" id="play-button"></i>
+                    <i class="bi bi-play-circle-fill text-white font-bigger" id="play-button" data-path=""></i>
                     <i class="bi bi-pause-circle-fill text-white font-bigger hide" id="pause-button"></i>
                 </button>
                 <button class="btn btn-outline-dark border border-0">
@@ -61,8 +61,12 @@
 
 <script>
     // Handle event when user click on
-    var audio = new Audio("{{ asset('/uploads/songs/Di-De-Tro-Ve-Soobin-Hoang-Son.mp3') }}");
+    var audio;
     $('#play-button').on('click', function() {
+        var path = $(this).data('path');
+        var baseUrl = "{{ asset('/uploads/songs') }}";
+        console.log(baseUrl + "/" + path);
+        audio = new Audio(baseUrl + "/" + path);
         $(this).toggle();
         $('#pause-button').toggle();
         audio.play();

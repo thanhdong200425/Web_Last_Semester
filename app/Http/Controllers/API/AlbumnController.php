@@ -74,16 +74,14 @@ class AlbumnController extends Controller
 
 
             if ($songs->isNotEmpty()):
-                $albumn_name = $songs->first()->albumn_name;
-                $result[$albumn_name] = [];
-                $result[$albumn_name] = $songs->groupBy("song_name")->map(function ($songGroup) {
+                $result[0]['albumn_name'] = $songs->first()->albumn_name;
+                $result[1] = $songs->groupBy("song_name")->map(function ($songGroup) {
                     return [
                         "song_name" => $songGroup->first()->song_name,
                         "singers" => $songGroup->pluck("singer_name")->toArray(),
                         "path" => $songGroup->first()->path
                     ];
                 })->values();
-
                 return response()->json([
                     "status" => true,
                     "data" => $result
