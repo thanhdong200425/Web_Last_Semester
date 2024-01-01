@@ -18,18 +18,27 @@ class AlbumnController extends Controller
             ->join('songs', 'songs.song_id', '=', 'albumn_songs.song_id')
             ->join('song_singers', 'song_singers.song_id', '=', 'songs.song_id')
             ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
-            ->get(['songs.song_name', 'singers.singer_name', 'songs.path', 'songs.cover_photo', 'albumns.albumn_name',
-                'albumns.albumn_id', 'albumns.cover_photo']);
+            ->get([
+                'songs.song_name',
+                'singers.singer_name',
+                'songs.path',
+                'songs.cover_photo',
+                'albumns.albumn_name',
+                'albumns.albumn_id',
+                'albumns.cover_photo'
+            ]);
 
         if ($albumns->isNotEmpty()):
             $result = $albumns->groupBy('albumn_id')->map(function ($group) {
                 return [
+                    "albumn_id" => $group->first()->albumn_id,
                     "albumn_name" => $group->first()->albumn_name,
                     "albumn_photo" => $group->first()->cover_photo,
                     "songs" => $group->groupBy("song_name")->map(function ($items) {
                         $song_name = $items->first()->song_name;
                         $cover_photo = DB::table('songs')->where('song_name', '=', $song_name)->value('cover_photo');
                         return [
+                            "song_name" => $song_name,
                             "cover_photo" => $cover_photo,
                             "path" => $items->first()->path,
                             "singers" => $items->pluck('singer_name')->toArray()
