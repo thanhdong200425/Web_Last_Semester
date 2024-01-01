@@ -1,11 +1,25 @@
+/* --------------User------------------ */
 +) Sign-in
     -) Route: http://127.0.0.1:8000/api/
     -) Input: 'username' and 'password'
     -) Method: POST
 
-+) Sign-up (Not complete)
-    -) Route: http://127.0.0.1:8000/api/
-    -) Input: 
++) Sign-up 
+    -) Route: http://127.0.0.1:8000/api/sign_up
+    -) Input: "username", "password", and "email"
+    -) Method: POST
+
++) Update information of a user
+    -) Route: http://127.0.0.1:8000/api/user/{id}/update
+    -) Input: All expect : "username", "password", "role", "refresh_token", "access_token", "is_active", "remember_token" and "orign_password"
+    -) Method: PATCH
+
++) Display the information of a user
+    -) Route: http://127.0.0.1:8000/api/user/{id}/display
+    -) Input: none
+    -) Method: GET
+
+
 
 /* --------------Albumn------------------ */
 
@@ -24,6 +38,4 @@
     -) Input: none
     -) Method: GET
 
-+) Update information of an albumn (Not completed)
-    -) Route: http://127.0.0.1:8000/api/albumn/{albumn_id}
     

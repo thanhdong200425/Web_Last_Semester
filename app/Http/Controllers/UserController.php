@@ -99,10 +99,9 @@ class UserController extends Controller
         return $name;
     }
 
-    public function show($username)
+    public function show($id)
     {
-        $user = User::where('username', $username)->first();
-        //        dd($user->id);
+        $user = User::where('id', $id)->first();
         return view('pages.user-pages.edit-user', [
             'user' => $user
         ]);

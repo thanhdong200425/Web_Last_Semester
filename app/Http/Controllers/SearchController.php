@@ -20,7 +20,7 @@ class SearchController extends Controller
                                 <img src='{$imgSrc}' class='image-result'  />
                                 </td>";
                     $output .= "<td>
-                        <a href='/admin/users/{$user->username}'>
+                        <a href='/admin/users/edit/{$user->id}'>
                             {$user->username}
                         </a>
                             </td>";

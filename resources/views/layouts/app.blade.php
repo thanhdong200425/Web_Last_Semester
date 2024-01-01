@@ -42,8 +42,8 @@
 
         .image-result {
             height: 50px;
-            border-radius: 50%; 
-            
+            border-radius: 50%;
+
         }
     </style>
 
@@ -53,6 +53,7 @@
     @include('layouts.headers.header')
     @include('layouts.sidebars.right-sidebar')
     @include('layouts.sidebars.left-sidebar')
+    @include('layouts.footers.music-footer')
     <div class="main-container">
         @yield('main-content')
     </div>
@@ -69,6 +70,12 @@
     <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     <script src="/back/vendors/scripts/dashboard3.js"></script>
     <script src="https://kit.fontawesome.com/28e919254f.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#music_player').hide();
+            $('.pause_button').hide();
+        });
+    </script>
 </body>
 
 </html>

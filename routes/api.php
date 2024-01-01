@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\AlbumnController;
-use App\Http\Controllers\Api\SongController;
+use App\Http\Controllers\API\AlbumnController;
+use App\Http\Controllers\API\SongController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Albumn;
 use Illuminate\Http\Request;
@@ -28,23 +28,27 @@ Route::post('/sign_up', [UserController::class, 'sign_up'])->name('sign_up');
 
 Route::post('/sign_out', [UserController::class, 'sign_out'])->name('sign_out');
 
-Route::get('/songs', [UserController::class, 'get']);
+Route::prefix('/user/{id}')->group(function () {
 
-Route::prefix('user/{id}')->group(function () {
+    // Update information of a user
+    Route::patch('/update', [UserController::class, 'update'])->name('update');
 
-    Route::post('/update', [UserController::class, 'update'])->name('update');
+    // Display the information of a user
+    Route::get('/display', [UserController::class, 'show']);
 });
 
 Route::prefix('/albumn')->group(function () {
 
     // Get all the information of an albumn that include "songs", "singers", "albumn name" 
-    Route::get('/', [AlbumnController::class, 'index'])->name('albumn.show');
+    Route::get('/', [AlbumnController::class, 'index']);
 
     // Add exist song into an albumn
     Route::post('/{albumn_id}/add_song', [AlbumnController::class, 'addSong'])->name('albumn.addSong');
 
     // Get all the information of an albumn that include "songs", "singers", "albumn name" 
-    Route::get('/{albumn_id}', [AlbumnController::class, 'show'])->name('albumn.show');
+    Route::get('/{albumn_id}', [AlbumnController::class, 'show']);
+
+    
 });
 
 
@@ -53,25 +57,25 @@ Route::prefix('/albumn')->group(function () {
 
 // Route::get('/albumn/{id}', [AlbumnController::class, 'show'])->name('albumn.show');
 
-Route::get('/create_albumn', [AlbumnController::class, 'store'])->name('albumn.store');
+// Route::get('/create_albumn', [AlbumnController::class, 'store'])->name('albumn.store');
+
+// Route::get('/songs', [UserController::class, 'get']);
+
+// Route::put('/update_albumn/{id}', [AlbumnController::class, 'update'])->name('albumn.update');
+
+// Route::delete('/delete_albumn/{id}', [AlbumnController::class, 'destroy'])->name('albumn.destroy');
 
 
+// // CRUD song
+// Route::get('/songs', [SongController::class, 'index'])->name('song.index');
 
-Route::put('/update_albumn/{id}', [AlbumnController::class, 'update'])->name('albumn.update');
+// Route::get('/song/{id}', [SongController::class, 'show'])->name('song.show');
 
-Route::delete('/delete_albumn/{id}', [AlbumnController::class, 'destroy'])->name('albumn.destroy');
+// Route::get('/create_song', [SongController::class, 'store'])->name('song.store');
 
+// Route::put('/update_song/{id}', [SongController::class, 'update'])->name('song.update');
 
-// CRUD song
-Route::get('/songs', [SongController::class, 'index'])->name('song.index');
-
-Route::get('/song/{id}', [SongController::class, 'show'])->name('song.show');
-
-Route::get('/create_song', [SongController::class, 'store'])->name('song.store');
-
-Route::put('/update_song/{id}', [SongController::class, 'update'])->name('song.update');
-
-Route::delete('/delete_song/{id}', [SongController::class, 'destroy'])->name('song.destroy');
+// Route::delete('/delete_song/{id}', [SongController::class, 'destroy'])->name('song.destroy');
 
 
 

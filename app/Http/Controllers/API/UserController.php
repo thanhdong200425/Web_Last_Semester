@@ -51,11 +51,49 @@ class UserController extends Controller
             'remember_token' => Str::random(60)
         ]);
         if ($data) {
-            return response()->json(['status' => true]);
+            return response()->json(
+                ['status' => true]
+            );
         }
 
         return response()->json([
-            'status'=>false
+            'status' => false
+        ]);
+    }
+
+    public function update($id, Request $request): JsonResponse
+    {
+        $user = User::find($id);
+        if ($user == null):
+            return response()->json([
+                "status" => false
+            ]);
+        endif;
+
+        $requestField = ['email', 'cover_photo', 'phone_number', 'gender', 'dob', 'country', 'facebook', 'twitter', 'instagram', 'tiktok', 'youtube'];
+        $user->fill($request->only($requestField));
+        $user->updated_at = date("Y-m-d H:i:s");
+        $user->save();
+
+        return response()->json([
+            "status" => true,
+        ]);
+    }
+
+    public function show($id): JsonResponse
+    {
+        $user = User::find($id);
+
+        if ($user == null):
+            return response()->json([
+                "status" => false,
+                "data" => null
+            ]);
+        endif;
+
+        return response()->json([
+            "status" => true,
+            "data" => $user
         ]);
     }
 }

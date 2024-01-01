@@ -37,7 +37,7 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
     Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/edit/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::get('users/{username}', [UserController::class, 'show'])->name('users.show');
+    Route::get('users/show/{id}', [UserController::class, 'show'])->name('users.show');
 
     // Create user routes
     Route::get('/users/create', [UserController::class, 'create'])->name('user.create');

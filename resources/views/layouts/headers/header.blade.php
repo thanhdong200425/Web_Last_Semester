@@ -176,7 +176,8 @@
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
+                $('#results').html('User not found');
+                $('#results').show();
             }
         });
     });

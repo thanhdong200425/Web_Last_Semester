@@ -79,7 +79,7 @@
                     $id = ($currentPage - 1) * $itemPerPage + 1;
                 @endphp
                 @foreach ($data as $item)
-                    <tr id="item-{{$item->song_id}}">
+                    <tr id="item-{{ $item->song_id }}">
                         <td>{{ $id++ }}</td>
                         <td>{{ $item->song_name }}</td>
                         <td class="small-text">{{ $item->created_at }}</td>
@@ -95,9 +95,13 @@
                         <td class="actions" onclick="toggleDropdown(this)">
                             ...
                             <div class="actions-dropdown">
-                                <a href="#">
-                                    <span class="micon bi bi-eye"></span>
-                                    <span class="mtext">View</span>
+                                <a href="#" class="play_button">
+                                    <i class="bi bi-play-circle"></i>
+                                    <span class="mtext">Play</span>
+                                </a>
+                                <a href="#" class="pause_button">
+                                    <i class="bi bi-pause-circle"></i>
+                                    <span class="mtext">Pause</span>
                                 </a>
                                 <a href="{{ route('song.edit', ['song_id' => $item->song_id]) }}">
                                     <span class="micon bi bi-pencil"></span>
@@ -108,15 +112,6 @@
                                     <span class="micon bi bi-trash3"></span>
                                     <span class="mtext">Delete</span>
                                 </a>
-                                {{-- <form id="song_{{ $song->song_id }}" action="{{ route('song.destroy', $song->song_id) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a onclick="document.getElementById('song_{{ $song->song_id }}').submit();">
-                                        <span class="micon bi bi-trash3"></span>
-                                        <span class="mtext">Delete</span>
-                                    </a>
-                                </form> --}}
                             </div>
                         </td>
                     </tr>
@@ -147,6 +142,21 @@
                     $('#item-' + id).remove();
                 }
             });
+        });
+
+        $('.play_button').on('click', function(event) {
+            $(this).hide();
+            $('#music_player').show();
+            $('.pause_button').show();
+            $('#play-button').show();
+            $('#pause-button').hide();
+        });
+
+        $('.pause_button').on('click', function(event) {
+            $(this).hide();
+            $('#music_player').hide();
+            $('.play_button').show();
+            audio.pause();
         });
     </script>
 @endsection
