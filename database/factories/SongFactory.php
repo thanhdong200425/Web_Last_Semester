@@ -16,12 +16,13 @@ class SongFactory extends Factory
      */
     public function definition(): array
     {
-        
+        $duration = $this->faker->numberBetween(1,9) . ':' . $this->faker->numberBetween(1, 60);
         return [
             'song_name' => $this->faker->words(3, true),
             'lyric' => $this->faker->text(200),
             'cover_photo' => $this->faker->imageUrl(640, 480),
-            'path' => $this->faker->url()
+            'path' => $this->faker->url(),
+            'duration' => $duration
         ];
     }
 }
