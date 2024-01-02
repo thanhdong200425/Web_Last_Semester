@@ -27,7 +27,7 @@ Route::post('/', [AuthController::class, 'authenticate'])->middleware('check_use
 Route::get('/sign-up', [SignUpController::class, 'index'])->name('sign-up');
 Route::post('/sign-up', [SignUpController::class, 'store'])->name('sign-up.store');
 
-Route::prefix('admin')->middleware('is_login')->group(function () {
+Route::prefix('admin')->middleware(['is_login', 'verified'])->group(function () {
     // Dashboard routes
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::delete('/dashboard/delete/{singer_id}', [DashboardController::class, 'delete'])->name('dashboard.delete-singer');
@@ -83,4 +83,5 @@ Route::prefix('admin')->middleware('is_login')->group(function () {
 
     // Search routes
     Route::get('/dashboard/search/', [SearchController::class, 'search'])->name('search');
+    
 });
