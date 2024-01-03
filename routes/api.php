@@ -28,7 +28,7 @@ Route::post('/sign_up', [UserController::class, 'sign_up'])->name('sign_up');
 
 Route::post('/sign_out', [UserController::class, 'sign_out'])->name('sign_out');
 
-Route::prefix('/{id}')->middleware('authenticate_user')->roup(function () {
+Route::prefix('/{id}')->middleware('authenticate_user')->group(function () {
 
     // Update information of a user
     Route::patch('/update', [UserController::class, 'update'])->name('update');
