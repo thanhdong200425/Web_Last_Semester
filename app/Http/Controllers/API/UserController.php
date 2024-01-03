@@ -19,19 +19,24 @@ class UserController extends Controller
             ->where('username', '=', $request->username)
             ->where('role', '=', 1)
             ->first();
-
+   
         if ($data != null):
             if (Hash::check($request->password, $data->password)):
+                session([
+                    'user' => $data->id
+                ]);
                 return response()->json([
                     'status' => true,
                     'data' => User::find($data->id)
                 ]);
             endif;
+            
             return response()->json([
                 'status' => false,
                 'data' => []
             ]);
         endif;
+
 
         return response()->json([
             'status' => false,

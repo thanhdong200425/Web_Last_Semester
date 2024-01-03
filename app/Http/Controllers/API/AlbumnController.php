@@ -78,21 +78,22 @@ class AlbumnController extends Controller
                 ->get(['songs.*', 'singers.*', 'albumns.albumn_name', 'albumns.cover_photo as albumn_photo', 'albumns.short_description as albumn_description']);
 
             if ($songs->isNotEmpty()):
-                $result[0]['albumn_name'] = $songs->first()->albumn_name;
-                $result[0]['albumn_photo'] = $songs->first()->albumn_photo;
-                $result[0]['albumn_description'] = $songs->first()->albumn_description;
-                $result[1] = $songs->groupBy("song_name")->map(function ($songGroup) {
+                $result = new \stdClass();
+                $result->albumn_name = $songs->first()->albumn_name;
+                $result->albumn_photo = $songs->first()->albumn_photo;
+                $result->albumn_description = $songs->first()->albumn_description;
+                $result->songs = $songs->groupBy("song_name")->map(function ($songGroup) {
                     return [
                         "song_name" => $songGroup->first()->song_name,
                         "song_photo" => $songGroup->first()->cover_photo,
                         "singers" => $songGroup->groupBy("singer_name")->map(function ($singer) {
-                                return [
-                                    "singer_name" => $singer->first()->singer_name,
-                                    "country" => $singer->first()->country,
-                                    "date_of_birth" => $singer->first()->dob,
-                                    "singer_description" => $singer->first()->short_description,
-                                    "gender" => $singer->first()->gender,
-                                ];
+                            return [
+                                "singer_name" => $singer->first()->singer_name,
+                                "country" => $singer->first()->country,
+                                "date_of_birth" => $singer->first()->dob,
+                                "singer_description" => $singer->first()->short_description,
+                                "gender" => $singer->first()->gender,
+                            ];
                         })->values(),
                         "path" => $songGroup->first()->path,
                         "lyric" => $songGroup->first()->lyric,

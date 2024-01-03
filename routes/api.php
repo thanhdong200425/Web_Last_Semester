@@ -28,7 +28,7 @@ Route::post('/sign_up', [UserController::class, 'sign_up'])->name('sign_up');
 
 Route::post('/sign_out', [UserController::class, 'sign_out'])->name('sign_out');
 
-Route::prefix('/user/{id}')->group(function () {
+Route::prefix('/{id}')->group(function () {
 
     // Update information of a user
     Route::patch('/update', [UserController::class, 'update'])->name('update');
@@ -37,8 +37,8 @@ Route::prefix('/user/{id}')->group(function () {
     Route::get('/display', [UserController::class, 'show']);
 });
 
-Route::prefix('/albumn')->group(function () {
-
+// Route::prefix('/albumn')->middleware('authenticate_user')->group(function () {
+    Route::prefix('/albumn')->group(function () {
     // Get all the information of all albumns that include "songs", "singers", "albumn name" 
     Route::get('/', [AlbumnController::class, 'index']);
 

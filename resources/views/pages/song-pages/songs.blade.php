@@ -81,7 +81,7 @@
                 @foreach ($data as $item)
                     <tr id="item-{{ $item->song_id }}">
                         <td>{{ $id++ }}</td>
-                        <td>{{ $item->song_name }}</td>
+                        <td class="song-name" data-name="{{ $item->song_name }}">{{ $item->song_name }}</td>
                         <td class="small-text">{{ $item->created_at }}</td>
                         <td class="small-text">{{ $item->updated_at }}</td>
                         <td>
@@ -146,6 +146,10 @@
 
         $('.play_button').on('click', function(event) {
             var path = $(this).data('path');
+            var image;
+            var title = $('.song-name').data('name');
+            console.log(title);
+            var descrition
             $(this).hide();
             $('#music_player').show();
             $('.pause_button').show();

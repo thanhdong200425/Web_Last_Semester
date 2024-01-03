@@ -53,7 +53,6 @@
                 <audio src="" id="song"></audio>
             </div>
             <div class="col-3">
-                <h1>Hello Wolrd</h1>
             </div>
         </div>
     </div>

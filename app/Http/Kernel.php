@@ -3,6 +3,7 @@
 namespace App\Http;
 
 
+use App\Http\Middleware\AuthenticateUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -70,5 +71,6 @@ class Kernel extends HttpKernel
         'check_user_is_active' => \App\Http\Middleware\CheckUserIsActive::class,
         'is_login' => \App\Http\Middleware\IsLogin::class,
         'is_remember_user' => \App\Http\Middleware\IsRememberUser::class,
+        'authenticate_user' => AuthenticateUser::class,
     ];
 }
