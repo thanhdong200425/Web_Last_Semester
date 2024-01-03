@@ -46,7 +46,7 @@ Route::prefix('/albumn')->group(function () {
     Route::post('/{albumn_id}/add_song', [AlbumnController::class, 'addSong'])->name('albumn.addSong');
 
     // Get all the information of an albumn that include "songs", "singers", "albumn name" 
-    Route::get('/{albumn_id}', [AlbumnController::class, 'show'])->middleware('authenticate_user'); 
+    Route::get('/{albumn_id}', [AlbumnController::class, 'show']); 
 });
 
 Route::get('/songs', [SongController::class, ]);
