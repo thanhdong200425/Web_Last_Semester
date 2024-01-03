@@ -18,20 +18,31 @@ class SongController extends Controller
         $song_singers = DB::table('song_singers')
             ->join('songs', 'songs.song_id', '=', 'song_singers.song_id')
             ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
-            ->select('songs.song_name', 'singers.singer_name', 'songs.cover_photo', 'songs.duration')
+            ->select(['songs.*', 'singers.singer_name'])
             ->get();
 
-        if ($song_singers) {
-
+        if ($song_singers->count() == 0):
             return response()->json([
-                'status' => true,
-                'data' => $song_singers
+                "status" => false,
+                "data" => null
             ]);
-        }
+        endif;
+
+        $result = $song_singers->groupBy('song_id')->map(function ($song) {
+            return [
+                "song_id" => $song->first()->song_id,
+                "song_name" => $song->first()->song_name,
+                "song_photo" => $song->first()->cover_photo,
+                "lyric" => $song->first()->lyric,
+                "duration" => $song->first()->duration,
+                "path" => $song->first()->path,
+                "singers" => $song->pluck('singer_name')->toArray()
+            ];
+        })->values();
 
         return response()->json([
-            'status' => false,
-            'data' => null
+            "status" => true,
+            "data" => $result
         ]);
     }
 
@@ -61,9 +72,38 @@ class SongController extends Controller
     /**
      * Display the specified songs by ID .
      */
-    public function show(string $id)
+    public function show($song_id)
     {
-        //
+        $song = DB::table('song_singers')
+            ->join('songs', 'songs.song_id', '=', 'song_singers.song_id')
+            ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
+            ->where('song_singers.song_id', '=', $song_id)
+            ->get([
+                'songs.*',
+                'singers.singer_name'
+            ]);
+
+        if ($song == null):
+            return response()->json([
+                "status" => false,
+                "data" => $song
+            ]);
+        endif;
+
+        $data = new \stdClass();
+        $data->song_id = $song->first()->song_id;
+        $data->song_name = $song->first()->song_name;
+        $data->song_photo = $song->first()->cover_photo;
+        $data->lyric = $song->first()->lyric;
+        $data->duration = $song->first()->duration;
+        $data->path = $song->first()->path;
+        $data->singers = $song->pluck('singer_name')->toArray();
+
+        return response()->json([
+            "status" => true,
+            "data" => $data
+        ]);
+
     }
 
     /**
@@ -83,7 +123,7 @@ class SongController extends Controller
         //         'data' => $song
         //     ]);
         // }
-        
+
         // return response()->json([
         //     'status' => false,
         //     'data' => null

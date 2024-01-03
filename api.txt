@@ -38,4 +38,14 @@
     -) Input: none
     -) Method: GET
 
-    
+/* --------------Song------------------ */  
+
++) Get all the information of all albumns that include "songs.*", "singer name"
+    -) Route: http://127.0.0.1:8000/api/songs/
+    -) Input: none
+    -) Method: GET
+
++) Get all the information of an albumns that include "songs.*", "singer name"
+    -) Route: http://127.0.0.1:8000/api/songs/{song_id}
+    -) Input: none
+    -) Method: GET    

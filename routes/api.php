@@ -38,7 +38,6 @@ Route::prefix('/{id}')->middleware('authenticate_user')->group(function () {
 });
 
 Route::prefix('/albumn')->group(function () {
-    // Route::prefix('/albumn')->group(function () {    
     // Get all the information of all albumns that include "songs", "singers", "albumn name" 
     Route::get('/', [AlbumnController::class, 'index']);
 
@@ -49,7 +48,14 @@ Route::prefix('/albumn')->group(function () {
     Route::get('/{albumn_id}', [AlbumnController::class, 'show']); 
 });
 
-Route::get('/songs', [SongController::class, ]);
+Route::prefix('/songs')->group(function () {
+
+    // Get all the information of all albumns that include "songs.*", "singer name"
+    Route::get('/', [SongController::class, 'index']);
+
+    // Get all the information of an albumns that include "songs.*", "singer name"
+    Route::get('/{song_id}', [SongController::class, 'show']);
+});
 
 
 
