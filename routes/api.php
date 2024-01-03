@@ -37,8 +37,8 @@ Route::prefix('/{id}')->group(function () {
     Route::get('/display', [UserController::class, 'show']);
 });
 
-// Route::prefix('/albumn')->middleware('authenticate_user')->group(function () {
-    Route::prefix('/albumn')->group(function () {
+Route::prefix('/albumn')->middleware('authenticate_user')->group(function () {
+    // Route::prefix('/albumn')->group(function () {    
     // Get all the information of all albumns that include "songs", "singers", "albumn name" 
     Route::get('/', [AlbumnController::class, 'index']);
 
