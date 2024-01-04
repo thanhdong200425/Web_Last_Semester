@@ -123,8 +123,10 @@ class PlaylistController extends Controller
                     ->where('playlist_songs.playlist_id', '=', $playlist_id)
                     ->join('songs', 'songs.song_id', '=', 'playlist_songs.song_id')
                     ->join('playlists', 'playlists.playlist_id', '=', 'playlist_songs.playlist_id')
+                    ->join('song_singers', 'song_singers.song_id', '=', 'songs.song_id')
+                    ->join('singers','singers.singer_id', '=', 'song_singers.singer_id')
                     ->get([
-                        "songs.*", 'playlists.*'
+                        "songs.*", 'playlists.*', 'singers.stage_name'
                     ]);
           
         if ($playlist->isNotEmpty()):
@@ -139,6 +141,7 @@ class PlaylistController extends Controller
                     "lyric" => $song->first()->lyric,
                     "duration" => $song->first()->duration,
                     "path" => $song->first()->path,
+                    "singers" => $song->pluck('stage_name')->toArray()
                 ];
             })->values();
 
@@ -147,6 +150,11 @@ class PlaylistController extends Controller
                 "data" => $result
             ]);
         endif;
+
+        return response()->json([
+            "status" => false,
+            "data" => null
+        ]);
     }
 
     function getSpecial($id): JsonResponse
