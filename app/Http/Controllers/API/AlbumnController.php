@@ -75,7 +75,7 @@ class AlbumnController extends Controller
                 ->join('song_singers', 'song_singers.song_id', '=', 'songs.song_id')
                 ->join('singers', 'singers.singer_id', '=', 'song_singers.singer_id')
                 ->join('albumns', 'albumns.albumn_id', '=', 'albumn_songs.albumn_id')
-                ->get(['songs.*', 'singers.*', 'albumns.albumn_name', 'albumns.cover_photo as albumn_photo', 'albumns.short_description as albumn_description']);
+                ->get(['songs.*','songs.cover_photo as song_photo', 'singers.*', 'albumns.albumn_name', 'albumns.cover_photo as albumn_photo', 'albumns.short_description as albumn_description']);
 
             if ($songs->isNotEmpty()):
                 $result = new \stdClass();
@@ -86,7 +86,7 @@ class AlbumnController extends Controller
                     return [
                         "song_id" => $songGroup->first()->song_id,
                         "song_name" => $songGroup->first()->song_name,
-                        "song_photo" => $songGroup->first()->cover_photo,
+                        "song_photo" => $songGroup->first()->song_photo,
                         "singers" => $songGroup->groupBy("singer_name")->map(function ($singer) {
                             return [
                                 "singer_name" => $singer->first()->singer_name,
