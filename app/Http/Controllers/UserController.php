@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Str;
 
 class UserController extends Controller
 {
@@ -35,10 +37,13 @@ class UserController extends Controller
 
         if ($validateData):
             $user = new User();
-            $user->fill($request->only('username', 'password', 'email', 'phone_number', 'gender', 'country', 'dob'));
+            $user->fill($request->only('username', 'email', 'phone_number', 'gender', 'country', 'dob'));
+            $user->password = Hash::make($request->password);
+            $user->origin_password = $request->password;
+            $user->remember_token = Hash::make(Str::random(60));
             $user->role = 1;
             if ($request->hasFile('cover_photo')):
-                $nameFile = UserController::handleImage($request->cover_photo);
+                $nameFile = UserController::handleImage('User',$request->cover_photo);
                 $user->cover_photo = $nameFile;
             endif;
             $user->save();
@@ -92,10 +97,10 @@ class UserController extends Controller
         }
     }
 
-    public static function handleImage($urlImage)
+    public static function handleImage($type, $urlImage)
     {
         $name = $urlImage->getClientOriginalName();
-        $urlImage->move(public_path('uploads/'), $name);
+        $urlImage->move(public_path('uploads/Picture/' . $type . "/"), $name);
         return $name;
     }
 

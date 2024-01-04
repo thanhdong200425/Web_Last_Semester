@@ -72,9 +72,9 @@
                         <td>{{ $id++ }}</td>
                         <td>
                             @php
-                                $nameFile = file_exists(public_path('uploads/' . $singer->cover_photo)) ? asset('uploads/' . $singer->cover_photo) : $singer->cover_photo;
+                                $nameFile = file_exists(public_path('uploads/Picture/Singer/' . $singer->cover_photo)) ? asset('uploads/Picture/Singer/' . $singer->cover_photo) : $singer->cover_photo;
                             @endphp
-                            <img src="{{ $nameFile }}" alt="Cover Photo" style="max-width: 50px;">
+                            <img src="{{ $nameFile }}" alt="Cover Photo" width="45" height="45" style="max-width: 50px; max-height: 50px; object-fit: cover">
                         </td>
                         <td>{{ $singer->singer_name }}</td>
                         <td>{{ $singer->stage_name }}</td>

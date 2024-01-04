@@ -86,16 +86,15 @@
                         <td class="small-text">{{ $item->updated_at }}</td>
                         <td>
                             @php
-                                $nameFile = file_exists(public_path('uploads/' . $item->cover_photo)) ? asset('uploads/' . $item->cover_photo) : $item->cover_photo;
-
+                                $nameFile = file_exists(public_path('uploads/Picture/Song/' . $item->song_photo)) ? asset('uploads/Picture/Song/' . $item->song_photo) : $item->song_photo;
                             @endphp
                             <img src="{{ $nameFile }}" alt="Cover Photo" style="max-width: 50px;">
                         </td>
-                        <td>{{ $item->singer_name }}</td>
+                        <td>{{ $item->stage_name }}</td>
                         <td class="actions" onclick="toggleDropdown(this)">
                             ...
                             <div class="actions-dropdown">
-                                <a href="#" class="play_button" data-path="{{ $item->path}}">
+                                <a href="#" class="play_button" data-path="{{ $item->path}}" data-title="{{ $item->song_name }}" data-singer="{{ $item->stage_name }}" data-image="{{ $item->song_photo }}">
                                     <i class="bi bi-play-circle"></i>
                                     <span class="mtext">Play</span>
                                 </a>
@@ -145,16 +144,19 @@
         });
 
         $('.play_button').on('click', function(event) {
-            var path = $(this).data('path');
-            var image;
-            var title = $('.song-name').data('name');
-            console.log(title);
-            var descrition
+            var path = $(this).attr('data-path');
+            var title = $(this).attr('data-title');
+            var singer = $(this).attr('data-singer');
+            var urlImg = "{{ asset('/uploads/Picture/Song') }}";
+            var src = $(this).attr('data-image');
+
             $(this).hide();
             $('#music_player').show();
             $('.pause_button').show();
             $('#play-button').attr('data-path', path).show();
-            $('#pause-button').hide();
+            $('#singer').text(singer);
+            $('#title').text(title);
+            $('#img_src').attr('src', urlImg + "/" + src);
         });
 
         $('.pause_button').on('click', function(event) {

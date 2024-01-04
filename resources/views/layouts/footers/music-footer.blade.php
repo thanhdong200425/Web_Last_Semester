@@ -25,11 +25,11 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-4">
-                        <img src="{{ asset('/uploads/alu.jpg') }}" alt="" class="img-fluid rounded">
+                        <img src="{{ asset('/uploads/alu.jpg') }}" alt="" id="img_src" class="img-fluid rounded">
                     </div>
                     <div class="col-8">
-                        <h5 class="text-white my-2">Title</h5>
-                        <p class="fs-5">Description</p>
+                        <h5 class="text-white my-2" id="title">Title</h5>
+                        <p class="fs-5" id="singer">Description</p>
                     </div>
                 </div>
             </div>
@@ -62,9 +62,11 @@
     // Handle event when user click on
     var audio;
     $('#play-button').on('click', function() {
-        var path = $(this).data('path');
-        var baseUrl = "{{ asset('/uploads/songs') }}";
-        console.log(baseUrl + "/" + path);
+        var path = $(this).attr('data-path');
+        var baseUrl = "{{ asset('/uploads/MP3') }}";
+        var title = $(this).attr('data-title');
+        var singer = $(this).attr('data-singer');
+
         audio = new Audio(baseUrl + "/" + path);
         $(this).toggle();
         $('#pause-button').toggle();

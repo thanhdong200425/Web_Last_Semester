@@ -24,7 +24,7 @@
                     $id = ($currentPage - 1) * $itemsPerPage + 1;
                 @endphp
                 @foreach ($userList as $user)
-                    <tr id="{{ 'item-'. $user->id }}">
+                    <tr id="{{ 'item-' . $user->id }}">
                         <td>{{ $id++ }}</td>
                         <td class="table-plus">
                             <div class="name-avatar d-flex align-items-center">
@@ -35,6 +35,9 @@
                                     @endphp
                                     @if (file_exists($filePath))
                                         <img src="{{ asset('uploads/' . $user->cover_photo) }}"
+                                            class="border-radius-100 shadow" width="40" height="40" alt="" />
+                                    @elseif(file_exists(public_path('uploads/Picture/User/' . $user->cover_photo)))
+                                        <img src="{{ asset('uploads/Picture/User/' . $user->cover_photo) }}"
                                             class="border-radius-100 shadow" width="40" height="40" alt="" />
                                     @else
                                         <img src="{{ $user->cover_photo }}" class="border-radius-100 shadow" width="40"

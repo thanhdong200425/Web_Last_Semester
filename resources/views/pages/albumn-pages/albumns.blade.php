@@ -87,7 +87,7 @@
                         <td class="small-text">{{ $albumn->updated_at }}</td>
                         <td>
                             @php
-                                $nameFile = file_exists(public_path('uploads/' . $albumn->cover_photo)) ? asset('uploads/' . $albumn->cover_photo) : $albumn->cover_photo;
+                                $nameFile = file_exists(public_path('uploads/Picture/Album/' . $albumn->cover_photo)) ? asset('uploads/Picture/Album/' . $albumn->cover_photo) : $albumn->cover_photo;
 
                             @endphp
                             <img src="{{ $nameFile }}" alt="Cover Photo" style="max-width: 50px;">
