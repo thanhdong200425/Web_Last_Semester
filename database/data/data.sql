@@ -23,20 +23,20 @@ INSERT INTO `songs`(`song_name`, `cover_photo`, `lyric`, `duration`, `path`) VAL
 ------------// INSERT TO SINGER TABLE //-------------
 ----------------------------------------------------
 
-INSERT INTO `singers`(`singer_name`, `stage_name`, `country`, `dob`, `cover_photo`, `short_description`, `created_at`, `updated_at`, `gender`) VALUES 
-('Nguyễn Đức Phúc','Đức Phúc','Việt Nam','1997-10-13','DucPhuc_avt',' Anh là một nam ca sĩ người Việt Nam. Anh được khán giả biết đến rộng rãi với tư cách quán quân của mùa thứ ba trong Giọng hát Việt.','','','Nam'),
-('Nghiêm Vũ Hoàng Long','RPT MCK','Việt Nam','1999-03-02','MCKeyy_avt','Được biết đến với nghệ danh MCK, RPT MCK, Nger, hay Ngơ (khi còn theo đuổi thể loại nhạc indie) là một nam rapper, ca sĩ kiêm sáng tác nhạc người Việt Nam.','','','Nam'),
-('Đoàn Thế Lân','greyD','Việt Nam','2000-12-11','greyD_avt',' anh chàng Gen Z sở hữu cho mình khả năng chơi nhạc cụ thuần thục cùng với giọng ca ấm áp đặc biệt hơn là anh còn có khả năng sáng tác nhạc tốt và vẻ ngoài nam tính.','','','Nam'),
-('Trần Phương Ly','Phương Ly','Việt Nam','1990-10-28','PhuongLy_avt','Cô bắt đầu nổi danh với vai trò là một nhân vật nổi tiếng trên mạng xã hội, sau đó hoạt động với tư cách là một nghệ sĩ âm nhạc và nhanh chóng nhận về những thành công lớn.','','','Nữ'),
-('Justine Drew Bieber','Justine Bieber','Canada','1994-3-1','JustinBieber_avt','Được coi là một biểu tượng nhạc pop, anh được công nhận về nghệ thuật kết hợp thể loại và tầm ảnh hưởng toàn cầu trong âm nhạc đại chúng hiện đại','','','Nam'),
-('Lê Nguyễn Trung Đan','Binz','Việt Nam','1988-05-24','Binz_avt1','Binz Da Poet, Anh là một nam rapper kiêm nhạc sĩ sáng tác ca khúc người Việt Nam.','','','Nam'),
-('Hoàng Thái Vũ','Vũ','Việt Nam','1995-10-03','Vu_avt','Anh thường được biết đến với nghệ danh Vũ (cách điệu là Vũ.), là một nam ca sĩ kiêm nhạc sĩ sáng tác Nhạc indie người Việt Nam.','','','Nam'),
-('Charles Otto "Charlie" Puth Jr.','Charlie Puth','Mỹ','1991-12-02','CharliePuth_avt','Sự xuất hiện đầu tiên của anh ấy đến từ sự thành công lan truyền của các bản cover bài hát được tải lên YouTube ','','','Nam'),
-('Lê Trung Thành','Erik','Việt Nam','1997-10-13','Erik_avt1',' Erik là một nam ca sĩ kiêm vũ công người Việt Nam. Anh từng tham gia chương trình Giọng hát Việt nhí năm 2013 và sau đó trở thành thành viên của nhóm nhạc Monstar.','','','Nam'),
-('The Chainsmokers','The Chainsmokers','Mỹ','','TheChainsmokers_avt',' The Chainsmokers là bộ đôi DJ/nhà sản xuất/nhạc sĩ ở New York, Mỹ bao gồm hai thành viên chính Andrew Taggart (sinh năm 1989), Alex Pall (sinh năm 1985).','','','Nam'),
-('Vương Quốc Tuấn','Mr Siro','Việt Nam','1982-11-18','MrSiro_avt',' Ngoài sáng tác và tự trình bày thành công các ca khúc của mình, Mr. Siro còn sáng tác tác phẩm cho những ca sĩ trẻ khác, tạo nên những thành công cho họ','','','Nam'),
-('Nguyễn Huỳnh Sơn','Soobin Hoàng Sơn','Việt Nam','1992-09-10','SoobinHoangSon_avt',' Anh là một trong số ít nam ca sĩ tại Việt Nam có khả năng thể hiện được nhiều dòng nhạc và kĩ năng trình diễn sân khấu nổi bật.','','','Nam'),
-('Trần Thiện Thanh Bảo','B Ray','Việt Nam','1993-11-10','Bray_avt','B Ray từng là 1 rapper chuyên nghiệp của Underground Việt Nam. Anh có lối dùng skill độc đáo, đa dạng và điêu luyện.','','','Nam');
+INSERT INTO `singers`(`singer_name`, `stage_name`, `country`, `dob`, `cover_photo`, `short_description`, `gender`) VALUES 
+('Nguyễn Đức Phúc','Đức Phúc','Việt Nam','1997-10-13','DucPhuc_avt',' Anh là một nam ca sĩ người Việt Nam. Anh được khán giả biết đến rộng rãi với tư cách quán quân của mùa thứ ba trong Giọng hát Việt.','Nam'),
+('Nghiêm Vũ Hoàng Long','RPT MCK','Việt Nam','1999-03-02','MCKeyy_avt','Được biết đến với nghệ danh MCK, RPT MCK, Nger, hay Ngơ (khi còn theo đuổi thể loại nhạc indie) là một nam rapper, ca sĩ kiêm sáng tác nhạc người Việt Nam.','Nam'),
+('Đoàn Thế Lân','greyD','Việt Nam','2000-12-11','greyD_avt',' anh chàng Gen Z sở hữu cho mình khả năng chơi nhạc cụ thuần thục cùng với giọng ca ấm áp đặc biệt hơn là anh còn có khả năng sáng tác nhạc tốt và vẻ ngoài nam tính.','Nam'),
+('Trần Phương Ly','Phương Ly','Việt Nam','1990-10-28','PhuongLy_avt','Cô bắt đầu nổi danh với vai trò là một nhân vật nổi tiếng trên mạng xã hội, sau đó hoạt động với tư cách là một nghệ sĩ âm nhạc và nhanh chóng nhận về những thành công lớn.','Nữ'),
+('Justine Drew Bieber','Justine Bieber','Canada','1994-3-1','JustinBieber_avt','Được coi là một biểu tượng nhạc pop, anh được công nhận về nghệ thuật kết hợp thể loại và tầm ảnh hưởng toàn cầu trong âm nhạc đại chúng hiện đại','Nam'),
+('Lê Nguyễn Trung Đan','Binz','Việt Nam','1988-05-24','Binz_avt1','Binz Da Poet, Anh là một nam rapper kiêm nhạc sĩ sáng tác ca khúc người Việt Nam.','Nam'),
+('Hoàng Thái Vũ','Vũ','Việt Nam','1995-10-03','Vu_avt','Anh thường được biết đến với nghệ danh Vũ (cách điệu là Vũ.), là một nam ca sĩ kiêm nhạc sĩ sáng tác Nhạc indie người Việt Nam.','Nam'),
+('Charles Otto "Charlie" Puth Jr.','Charlie Puth','Mỹ','1991-12-02','CharliePuth_avt','Sự xuất hiện đầu tiên của anh ấy đến từ sự thành công lan truyền của các bản cover bài hát được tải lên YouTube ','Nam'),
+('Lê Trung Thành','Erik','Việt Nam','1997-10-13','Erik_avt1',' Erik là một nam ca sĩ kiêm vũ công người Việt Nam. Anh từng tham gia chương trình Giọng hát Việt nhí năm 2013 và sau đó trở thành thành viên của nhóm nhạc Monstar.','Nam'),
+('The Chainsmokers','The Chainsmokers','Mỹ','','TheChainsmokers_avt',' The Chainsmokers là bộ đôi DJ/nhà sản xuất/nhạc sĩ ở New York, Mỹ bao gồm hai thành viên chính Andrew Taggart (sinh năm 1989), Alex Pall (sinh năm 1985).','Nam'),
+('Vương Quốc Tuấn','Mr Siro','Việt Nam','1982-11-18','MrSiro_avt',' Ngoài sáng tác và tự trình bày thành công các ca khúc của mình, Mr. Siro còn sáng tác tác phẩm cho những ca sĩ trẻ khác, tạo nên những thành công cho họ','Nam'),
+('Nguyễn Huỳnh Sơn','Soobin Hoàng Sơn','Việt Nam','1992-09-10','SoobinHoangSon_avt',' Anh là một trong số ít nam ca sĩ tại Việt Nam có khả năng thể hiện được nhiều dòng nhạc và kĩ năng trình diễn sân khấu nổi bật.','Nam'),
+('Trần Thiện Thanh Bảo','B Ray','Việt Nam','1993-11-10','Bray_avt','B Ray từng là 1 rapper chuyên nghiệp của Underground Việt Nam. Anh có lối dùng skill độc đáo, đa dạng và điêu luyện.','Nam');
 
 
 ----------------------------------------------------
@@ -66,11 +66,11 @@ INSERT INTO `song_singers`(`song_id`, `singer_id`) VALUES
 ------------// INSERT TO ALBUM TABLE //-------------
 ----------------------------------------------------
 
-INSERT INTO `albumns`(`albumn_id`, `albumn_name`, `number_songs`, `cover_photo`, `short_description`, `created_at`, `updated_at`) VALUES
-('1','Ái','3','uploads/Ai_album','Với dòng nhạc R&B đầy cuốn hút và tập trung khai thác chủ đề tình yêu, tlinh mang đến cho khán giả những ca khúc mang thông điệp vừa quen thuộc nhưng cũng vừa mới lạ từ chính những quan niệm độc đáo và mới mẻ của riêng cô.','',''),
-('2','99%','4','uploads/99%_album','Cái tên 99% là sự không hoàn hảo. Dù mình làm cái gì, cố gắng đến đâu thì cũng chỉ đến được 99% mà thôi','',''),
-('3','Best of 2023','3','uploads/best_album','Trong thời điểm hỗn loạn, âm nhạc có thể là nơi giải thoát hoặc an ủi','',''),
-('4','Love is so sweet','3','uploads/love_album','Bất kể tình trạng mối quan hệ của bạn như thế nào, thật khó để không đánh giá cao một bản tình ca ngọt ngào.','','');
+INSERT INTO `albumns`(`albumn_id`, `albumn_name`, `number_songs`, `cover_photo`, `short_description`) VALUES
+('1','Ái','3','uploads/Ai_album','Với dòng nhạc R&B đầy cuốn hút và tập trung khai thác chủ đề tình yêu, tlinh mang đến cho khán giả những ca khúc mang thông điệp vừa quen thuộc nhưng cũng vừa mới lạ từ chính những quan niệm độc đáo và mới mẻ của riêng cô.'),
+('2','99%','4','uploads/99%_album','Cái tên 99% là sự không hoàn hảo. Dù mình làm cái gì, cố gắng đến đâu thì cũng chỉ đến được 99% mà thôi'),
+('3','Best of 2023','3','uploads/best_album','Trong thời điểm hỗn loạn, âm nhạc có thể là nơi giải thoát hoặc an ủi'),
+('4','Love is so sweet','3','uploads/love_album','Bất kể tình trạng mối quan hệ của bạn như thế nào, thật khó để không đánh giá cao một bản tình ca ngọt ngào.');
 
 
 ----------------------------------------------------

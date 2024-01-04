@@ -35,6 +35,14 @@ Route::prefix('/{id}')->middleware('authenticate_user')->group(function () {
 
     // Display the information of a user
     Route::get('/display', [UserController::class, 'show']);
+
+    // Add a new playlist
+
+    // Delete a playlist
+
+    // Add song into a playlist
+
+    // Delete song from a playlist
 });
 
 Route::prefix('/albumn')->group(function () {
