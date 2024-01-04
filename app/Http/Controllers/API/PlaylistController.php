@@ -126,7 +126,26 @@ class PlaylistController extends Controller
                     ->get([
                         "songs.*", 'playlists.*'
                     ]);
+          
+        if ($playlist->isNotEmpty()):
+            $result = new \stdClass();
+            $result->playlist_id = $playlist->first()->playlist_id;
+            $result->playlist_name = $playlist->first()->playlist_name;
+            $result->songs = $playlist->groupBy('song_id')->map(function ($song) {
+                return [
+                    "song_id" => $song->first()->song_id,
+                    "song_name" => $song->first()->song_name,
+                    "song_photo" => $song->first()->cover_photo,
+                    "lyric" => $song->first()->lyric,
+                    "duration" => $song->first()->duration,
+                    "path" => $song->first()->path,
+                ];
+            })->values();
 
-       dd($playlist);             
+            return response()->json([
+                "status" => true,
+                "data" => $result
+            ]);
+        endif;
     }
 }
