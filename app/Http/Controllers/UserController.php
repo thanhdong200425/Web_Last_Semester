@@ -88,7 +88,7 @@ class UserController extends Controller
         if ($validateData) {
             $user = User::find($request->id);
             $user->fill($request->only('username', 'email', 'gender', 'country', 'dob', 'phone_number'));
-            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $user->cover_photo;
+            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage('User',$request->cover_photo) : $user->cover_photo;
             $user->cover_photo = $nameFile;
             $user->save();
             return redirect()->route('users');

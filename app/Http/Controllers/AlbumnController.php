@@ -42,7 +42,7 @@ class AlbumnController extends Controller
         if ($validationData) {
             $albumn = Albumn::find($request->albumn_id);
             $albumn->fill($request->only('albumn_name', 'number_songs', 'short_description'));
-            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $albumn->cover_photo;
+            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage('Album',$request->cover_photo) : $albumn->cover_photo;
             $albumn->cover_photo = $nameFile;
             $albumn->save();
 
