@@ -111,6 +111,22 @@ class PlaylistController extends Controller
 
     function get($id, $playlist_id): JsonResponse
     {
-        $playlist = Playlist::find();
+        $playlist = Playlist::find($playlist_id);
+        if ($playlist == null):
+            return response()->json([
+                "status" => false,
+                "data" => null
+            ]);
+        endif;
+
+        $playlist = DB::table('playlist_songs')
+                    ->where('playlist_songs.playlist_id', '=', $playlist_id)
+                    ->join('songs', 'songs.song_id', '=', 'playlist_songs.song_id')
+                    ->join('playlists', 'playlists.playlist_id', '=', 'playlist_songs.playlist_id')
+                    ->get([
+                        "songs.*", 'playlists.*'
+                    ]);
+
+       dd($playlist);             
     }
 }

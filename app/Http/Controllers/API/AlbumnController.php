@@ -84,6 +84,7 @@ class AlbumnController extends Controller
                 $result->albumn_description = $songs->first()->albumn_description;
                 $result->songs = $songs->groupBy("song_name")->map(function ($songGroup) {
                     return [
+                        "song_id" => $songGroup->first()->song_id,
                         "song_name" => $songGroup->first()->song_name,
                         "song_photo" => $songGroup->first()->cover_photo,
                         "singers" => $songGroup->groupBy("singer_name")->map(function ($singer) {
