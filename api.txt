@@ -1,4 +1,5 @@
 /* --------------User------------------ */
+
 +) Sign-in
     -) Route: http://127.0.0.1:8000/api/
     -) Input: 'username' and 'password'
@@ -48,4 +49,15 @@
 +) Get all the information of an albumns that include "songs.*", "singer name"
     -) Route: http://127.0.0.1:8000/api/songs/{song_id}
     -) Input: none
-    -) Method: GET    
+    -) Method: GET   
+
+/* --------------Playlist------------------ */  
+
++) Add a new playlist
+
+
++) Delete a playlist
+
++) Add song into a playlist
+
++) Delete song from a playlist
