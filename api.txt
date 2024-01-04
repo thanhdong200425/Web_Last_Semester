@@ -54,10 +54,21 @@
 /* --------------Playlist------------------ */  
 
 +) Add a new playlist
-
+    -) Route: http://127.0.0.1:8000/api/{id}/playlist/add
+    -) Input: "playlist_name"
+    -) Method: POST
 
 +) Delete a playlist
+    -) Route: http://127.0.0.1:8000/api/{id}/playlist/{playlist_id}/remove
+    -) Input: none
+    -) Method: DELETE
 
 +) Add song into a playlist
+    -) Route: http://127.0.0.1:8000/api/{id}/playlist/{playlist_id}/add_song
+    -) Input: "song_id"
+    -) Method: POST
 
 +) Delete song from a playlist
+    -) Route: http://127.0.0.1:8000/api/{id}/playlist/{playlist_id}/remove_song
+    -) Input: "song_id"
+    -) Method: DELETE

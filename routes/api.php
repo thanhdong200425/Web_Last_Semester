@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AlbumnController;
+use App\Http\Controllers\API\PlaylistController;
 use App\Http\Controllers\API\SongController;
 use App\Http\Controllers\API\UserController;
 use App\Models\Albumn;
@@ -28,7 +29,7 @@ Route::post('/sign_up', [UserController::class, 'sign_up'])->name('sign_up');
 
 Route::post('/sign_out', [UserController::class, 'sign_out'])->name('sign_out');
 
-Route::prefix('/{id}')->middleware('authenticate_user')->group(function () {
+Route::prefix('/{id}')->group(function () {
 
     // Update information of a user
     Route::patch('/update', [UserController::class, 'update'])->name('update');
@@ -37,12 +38,16 @@ Route::prefix('/{id}')->middleware('authenticate_user')->group(function () {
     Route::get('/display', [UserController::class, 'show']);
 
     // Add a new playlist
+    Route::post('/playlist/add', [PlaylistController::class, 'add']);
 
     // Delete a playlist
+    Route::delete('/playlist/{playlist_id}/remove', [PlaylistController::class, 'remove']);
 
     // Add song into a playlist
+    Route::post('/playlist/{playlist_id}/add_song', [PlaylistController::class, 'addSongIntoPlaylist']);
 
     // Delete song from a playlist
+    Route::delete('/playlist/{playlist_id}/remove_song', [PlaylistController::class, 'removeSongFromPlaylist']);
 });
 
 Route::prefix('/albumn')->group(function () {
