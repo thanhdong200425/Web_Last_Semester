@@ -78,4 +78,7 @@
     -) Input: none
     -) Method: GET
 
-+) Get all the information of an playlist that include "playlist_id", "playlist_name"    
++) Get all the information of an playlist that include "playlist_id", "playlist_name" 
+    -) Route: http://127.0.0.1:8000/api/{id}/playlist/
+    -) Input: none
+    -) Method: GET

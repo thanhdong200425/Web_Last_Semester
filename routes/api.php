@@ -51,6 +51,9 @@ Route::prefix('/{id}')->group(function () {
 
     // Get all the information of an playlist that include "songs.*", "singer name"
     Route::get('/playlist/{playlist_id}', [PlaylistController::class, 'get']);
+
+    // Get all the information of an playlist that include "playlist_id", "playlist_name" 
+    Route::get('/playlist/', [PlaylistController::class, 'getSpecial']);
 });
 
 Route::prefix('/albumn')->group(function () {
@@ -62,6 +65,8 @@ Route::prefix('/albumn')->group(function () {
 
     // Get all the information of an albumn that include "songs", "singers", "albumn name" 
     Route::get('/{albumn_id}', [AlbumnController::class, 'show']); 
+
+    
 });
 
 Route::prefix('/songs')->group(function () {

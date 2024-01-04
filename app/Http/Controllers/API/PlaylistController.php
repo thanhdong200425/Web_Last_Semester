@@ -13,7 +13,7 @@ class PlaylistController extends Controller
     public function add(Request $request, $id): JsonResponse
     {
         $playlist = new Playlist();
-        if ($request->playlist_name == "" || $request->user_id == ""):
+        if ($request->playlist_name == "" || $id == ""):
             return response()->json([
                 "status" => false
             ]);
@@ -147,5 +147,24 @@ class PlaylistController extends Controller
                 "data" => $result
             ]);
         endif;
+    }
+
+    function getSpecial($id): JsonResponse
+    {
+        $check = DB::table('playlists')->where('user_id', '=', $id)->get([
+            'playlist_id', 'playlist_name'
+        ]);
+
+        if ($check->count() == 0):
+            return response()->json([
+                "status" => false,
+                "data" => null
+            ]);
+        endif;
+
+        return response()->json([
+            "status" => true,
+            "data" => $check
+        ]);
     }
 }
