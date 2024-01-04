@@ -82,6 +82,7 @@ class PlaylistController extends Controller
 
     function removeSongFromPlaylist($id, $playlist_id, Request $request): JsonResponse
     {
+        
         $check = Playlist::where('user_id', $id)
             ->where('playlist_id', $playlist_id)
             ->count();
