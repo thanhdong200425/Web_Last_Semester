@@ -72,3 +72,8 @@
     -) Route: http://127.0.0.1:8000/api/{id}/playlist/{playlist_id}/remove_song
     -) Input: "song_id"
     -) Method: DELETE
+
++) Get all the information of an playlist that include "songs.*", "singer name"
+    -) Route: http://127.0.0.1:8000/api/{id}/playlist/{playlist_id}
+    -) Input: none
+    -) Method: GET

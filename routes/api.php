@@ -48,6 +48,9 @@ Route::prefix('/{id}')->group(function () {
 
     // Delete song from a playlist
     Route::delete('/playlist/{playlist_id}/remove_song', [PlaylistController::class, 'removeSongFromPlaylist']);
+
+    // Get all the information of an playlist that include "songs.*", "singer name"
+    Route::get('/playlist/{playlist_id}', [PlaylistController::class, 'get']);
 });
 
 Route::prefix('/albumn')->group(function () {

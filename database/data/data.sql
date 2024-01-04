@@ -4,6 +4,7 @@
 INSERT INTO `songs`(`song_name`, `cover_photo`, `lyric`, `duration`, `path`) VALUES 
 ('Chỉ một đêm nữa thôi','ChiMotDemNuaThoi.jpg','','','ChiMotDemNuaThoi.mp3'),
 ('Chạy về khóc với anh','ChayVeKhocVoiAnh.jpg','','','ChayVeKhocVoiAnh.mp3'),
+
 ('Chìm sâu','ChimSau.jpg','','','ChimSau.mp3'),
 ('Closer','Closer.jpg','','','Closer.mp3'),
 ('Đã từng vô giá','DaTungVoG.jpg','','','DaTungVoGia.mp3'),

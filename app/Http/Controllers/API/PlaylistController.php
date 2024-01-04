@@ -108,4 +108,9 @@ class PlaylistController extends Controller
             "status" => true
         ]);
     }
+
+    function get($id, $playlist_id): JsonResponse
+    {
+        $playlist = Playlist::find();
+    }
 }

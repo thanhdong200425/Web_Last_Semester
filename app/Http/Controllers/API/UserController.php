@@ -19,18 +19,20 @@ class UserController extends Controller
             ->where('username', '=', $request->username)
             ->where('role', '=', 1)
             ->first();
-   
+
         if ($data != null):
             if (Hash::check($request->password, $data->password)):
-                session([
-                    'user' => $data->id
-                ]);
+
+                $token = Str::random(60);
+                DB::table('users')->where('id', '=', $data->id)->update(['access_token' => hash('sha256', $token)]);
+
                 return response()->json([
                     'status' => true,
-                    'data' => User::find($data->id)
+                    'data' => User::find($data->id),
+                    'token' => $token
                 ]);
             endif;
-            
+
             return response()->json([
                 'status' => false,
                 'data' => []
