@@ -43,12 +43,16 @@
                         <input name="song_name" type="text" class="form-control" id="song_name" placeholder="Enter song name" required>
                     </div>
                     <div class="form-group">
-                        <label for="singer_name">Singer Name:</label>
-                        <input name="singer_name" type="text" class="form-control" id="song_name" placeholder="Enter singer name" required>
+                        <label for="stage_name">Singer Name:</label>
+                        <input name="stage_name" type="text" class="form-control" id="stage_name" placeholder="Enter singer name" required>
                     </div>
                     <div class="form-group">
                         <label for="cover_photo">Cover Photo:</label>
                         <input name="cover_photo" type="file" class="form-control" id="cover_photo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="path">Path:</label>
+                        <input name="path" type="file" class="form-control" id="path" required>
                     </div>
                     <div class="form-group">
                         <label for="lyric">Lyric:</label>

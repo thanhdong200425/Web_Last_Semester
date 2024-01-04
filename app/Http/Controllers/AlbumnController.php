@@ -76,8 +76,9 @@ class AlbumnController extends Controller
         if ($validationData) {
             $newAlbumn = new Albumn();
             $newAlbumn->fill($request->only('albumn_name', 'number_songs', 'cover_photo'));
-            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : null;
+            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage('Album',$request->cover_photo) : null;
             $newAlbumn->cover_photo = $nameFile;
+            $newAlbumn->short_description = $request->short_description;
             $newAlbumn->save();
             
             return redirect()->route('albumns');

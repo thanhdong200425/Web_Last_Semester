@@ -104,6 +104,12 @@ class UserController extends Controller
         return $name;
     }
 
+    public static function handlePath($url){
+        $name = $url->getClientOriginalName();
+        $url->move(public_path('uploads/MP3/'), $name);
+        return $name;
+    }
+
     public function show($id)
     {
         $user = User::where('id', $id)->first();

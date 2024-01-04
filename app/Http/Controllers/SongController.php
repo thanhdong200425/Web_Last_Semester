@@ -15,7 +15,7 @@ class SongController extends Controller
         $data = DB::table('song_singers')
             ->join('singers', 'song_singers.singer_id', '=', 'singers.singer_id')
             ->join('songs', 'song_singers.song_id', '=', 'songs.song_id')
-            ->select('songs.*', 'songs.cover_photo as song_photo' , 'singers.*', 'singers.cover_photo as singer_photo')
+            ->select('songs.*', 'songs.cover_photo as song_photo', 'singers.*', 'singers.cover_photo as singer_photo')
             ->paginate(5);
 
         return view('pages.song-pages.songs', [
@@ -82,26 +82,29 @@ class SongController extends Controller
     {
         $validateData = $request->validate([
             'song_name' => ['required', 'string', 'max:255'],
-            'singer_name' => ['required', 'string', 'max:255', 'exists:singers,singer_name'],
+            'stage_name' => ['required', 'string', 'max:255', 'exists:singers,stage_name'],
             'cover_photo' => ['required', 'image', 'max:2048'],
-            'lyric' => ['nullable', 'string']
+            'lyric' => ['nullable', 'string'],
+            'path' => ['required']
         ]);
 
         if ($validateData) {
             $song = new Song();
             if ($request->hasFile('cover_photo')) {
-                $nameFile = UserController::handleImage($request->cover_photo);
+                $nameFile = UserController::handleImage('Song', $request->cover_photo);
+                $path = UserController::handlePath($request->path);
+                $song->path = $path;
                 $song->cover_photo = $nameFile;
             }
 
             $song->fill([
                 'song_name' => $validateData['song_name'],
                 'lyric' => $validateData['lyric']
-            ]);
+            ]); 
             $song->save();
 
             $singer = DB::table('singers')
-                ->where('singer_name', '=', $validateData['singer_name'])
+                ->where('stage_name', '=', $validateData['stage_name'])
                 ->first();
             DB::table('song_singers')
                 ->insert([
