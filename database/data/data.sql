@@ -1,5 +1,5 @@
 ----------------------------------------------------
-------------// INSERT TO SINGER TABLE //-------------
+------------// INSERT TO SONGS TABLE //-------------
 ----------------------------------------------------
 INSERT INTO `songs`(`song_name`, `cover_photo`, `lyric`, `duration`, `path`) VALUES 
 ('Chỉ một đêm nữa thôi','ChiMotDemNuaThoi.jpg','','','ChiMotDemNuaThoi.mp3'),
@@ -33,7 +33,7 @@ INSERT INTO `singers`(`singer_name`, `stage_name`, `country`, `dob`, `cover_phot
 ('Hoàng Thái Vũ','Vũ','Việt Nam','1995-10-03','Vu_avt','Anh thường được biết đến với nghệ danh Vũ (cách điệu là Vũ.), là một nam ca sĩ kiêm nhạc sĩ sáng tác Nhạc indie người Việt Nam.','Nam'),
 ('Charles Otto "Charlie" Puth Jr.','Charlie Puth','Mỹ','1991-12-02','CharliePuth_avt','Sự xuất hiện đầu tiên của anh ấy đến từ sự thành công lan truyền của các bản cover bài hát được tải lên YouTube ','Nam'),
 ('Lê Trung Thành','Erik','Việt Nam','1997-10-13','Erik_avt1',' Erik là một nam ca sĩ kiêm vũ công người Việt Nam. Anh từng tham gia chương trình Giọng hát Việt nhí năm 2013 và sau đó trở thành thành viên của nhóm nhạc Monstar.','Nam'),
-('The Chainsmokers','The Chainsmokers','Mỹ','','TheChainsmokers_avt',' The Chainsmokers là bộ đôi DJ/nhà sản xuất/nhạc sĩ ở New York, Mỹ bao gồm hai thành viên chính Andrew Taggart (sinh năm 1989), Alex Pall (sinh năm 1985).','Nam'),
+('The Chainsmokers','The Chainsmokers','Mỹ','1997-02-02','TheChainsmokers_avt',' The Chainsmokers là bộ đôi DJ/nhà sản xuất/nhạc sĩ ở New York, Mỹ bao gồm hai thành viên chính Andrew Taggart (sinh năm 1989), Alex Pall (sinh năm 1985).','Nam'),
 ('Vương Quốc Tuấn','Mr Siro','Việt Nam','1982-11-18','MrSiro_avt',' Ngoài sáng tác và tự trình bày thành công các ca khúc của mình, Mr. Siro còn sáng tác tác phẩm cho những ca sĩ trẻ khác, tạo nên những thành công cho họ','Nam'),
 ('Nguyễn Huỳnh Sơn','Soobin Hoàng Sơn','Việt Nam','1992-09-10','SoobinHoangSon_avt',' Anh là một trong số ít nam ca sĩ tại Việt Nam có khả năng thể hiện được nhiều dòng nhạc và kĩ năng trình diễn sân khấu nổi bật.','Nam'),
 ('Trần Thiện Thanh Bảo','B Ray','Việt Nam','1993-11-10','Bray_avt','B Ray từng là 1 rapper chuyên nghiệp của Underground Việt Nam. Anh có lối dùng skill độc đáo, đa dạng và điêu luyện.','Nam');
