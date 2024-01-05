@@ -75,7 +75,7 @@ class SingerController extends Controller
         if ($validateData) {
             $singer = Singer::find($request->singer_id);
             $singer->fill($request->only('singer_name', 'stage_name', 'country', 'dob', 'gender', 'short_description'));
-            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage($request->cover_photo) : $singer->cover_photo;
+            $nameFile = ($request->hasFile('cover_photo')) ? UserController::handleImage('Singer',$request->cover_photo) : $singer->cover_photo;
             $singer->cover_photo = $nameFile;
             $singer->save();
 
