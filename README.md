@@ -1,5 +1,4 @@
 # MUSIC APPLICATION MANAGEMENT SYSTEM
-## Video Demo: [URL Here](https://youtu.be/2S6BzeuMyIY?si=NQag4DPcARyXt3Zy)
 ## Introduction:
 Welcome to the **Music Application Management System**. This project is a web-based application built to **manage and organize music collections, artists, albums, and user interactions.** It provides users with the ability to browse, search, and manage their music library efficiently. The application is developed using **Laravel, Blade, PHP, and MySQL, with XAMPP serving as the local development environment.**
 
