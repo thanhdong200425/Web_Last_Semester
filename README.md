@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MUSIC APPLICATION MANAGEMENT SYSTEM
+## Video Demo: [URL Here](https://youtu.be/2S6BzeuMyIY?si=NQag4DPcARyXt3Zy)
+## Introduction:
+Welcome to the **Music Application Management System**. This project is a web-based application built to **manage and organize music collections, artists, albums, and user interactions.** It provides users with the ability to browse, search, and manage their music library efficiently. The application is developed using **Laravel, Blade, PHP, and MySQL, with XAMPP serving as the local development environment.**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of contents
+#### 1. [Project Structure](#project-structure)
+#### 2. [Features](#features)
+#### 3. [Technologies Used](#technologies-used)
+#### 4. [Installation and Setup](#installation-and-setup)
+#### 5. [Design Decisions](#desgin-decisions)
+#### 6. [Future Enhancements](#future-enhancements)
+#### 7. [Conclusion](#conclusion)
 
-## About Laravel
+#
+### Project structure
+The project is organized into a typical Laravel structure, with controllers, models, views, and migrations forming the core components. Below is an overview of the main directories and files within the project:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
++ **`app/`** - Contains the core application files, including controllers and models.
++ **`resources/views/`** - Contains the Blade templates for the user interface.
++ **`database/migrations/`** - Contains the migration files for database schema.
++ **`routes/web.php`** - Defines the routes for the application.
++ **`public/`** - Hosts publicly accessible files like CSS, JS, and images.
++ **`composer.json`** - Handles the PHP dependencies required for the project.
+#
+### Features
+1. **User Management**: Allows users to register, login, and manage their profiles.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **Music Collection Management**: Users can add, edit, and delete songs, albums, and artists.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Responsive Design**: The application is designed to be fully responsive, ensuring it works well on both desktop and mobile devices.
 
-## Learning Laravel
+4. **Database Integration**: Utilizes MySQL for data storage, handling all CRUD operations efficiently.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#
+### Technologies Used
++ **`Laravel`**: A robust PHP framework that simplifies the development process with its elegant syntax and built-in features.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
++ **`Blade`**: Laravel’s templating engine, which helps in building dynamic and reusable views.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
++ **`PHP`**: The core programming language used for server-side logic.
 
-## Laravel Sponsors
++ **`MySQL`**: The relational database used to store all application data.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
++ **`XAMPP`**: A local development environment that provides Apache, MySQL, and PHP services.
+#
+### Installation and Setup
 
-### Premium Partners
+#### Prerequisites
+Before setting up and running the Music Application Management System, ensure you have the following prerequisites installed on your local machine:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. **PHP >= 8.0**: This project is built using Laravel, which requires PHP version 8.0 or higher. You can check your PHP version by running <code>php -v</code> in your terminal.
 
-## Contributing
+2. **Composer**: Composer is a dependency manager for PHP. It is required to install and manage the project dependencies. You can download it from [getcomposer.org](https://getcomposer.org/).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. **MySQL >= 5.7**: The application uses MySQL as the database system. Ensure you have MySQL installed and running. You can check your MySQL version with <code>mysql --version</code>.
 
-## Code of Conduct
+4. **XAMPP**: XAMPP is an easy-to-install Apache distribution containing PHP and MySQL. It’s recommended for running the application in a local development environment. You can download it from [apachefriends.org](https://www.apachefriends.org/).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. **Git**: Git is required to clone the repository and manage version control. You can install Git from [git-scm.com](https://git-scm.com/).
 
-## Security Vulnerabilities
+#
+To get started with the project locally, follow these steps:
+1. **Clone the repository from github of CS50:**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Change directory**
+    ``` bash
+    cd project
+3. **Install dependencies**
+    ``` bash
+    composer install
+4. **Setup environment variables**
 
-## License
+    + Change `example.env` into `.env` file
+    + Update database credentials in the `.env` file.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Run migrations**
+    ``` bash
+    php artisan migrate
+
+6. **Run the seeders**
+    ``` bash
+    php artisan db:seed
+7. **Serve the application**
+    ``` bash
+    php artisan serve
+
+The application should now be running on http://localhost:8000.
+#
+### Desgin Decisions
+
+#### Database Structure
+One of the critical design decisions was the structure of the database. The application follows a relational model, with tables for songs, albums, and artists. Each song is linked to an album, and each album is associated with an artist. This structure was chosen for its simplicity and efficiency in querying related data.
+
+#### Blade Templating
+The use of Blade for templating was another important choice. Blade's features like template inheritance, components, and conditionals made it easier to maintain and extend the application's views.
+
+#### Authentication
+Laravel’s built-in authentication system was utilized for managing users. This decision was made to leverage Laravel’s secure and well-documented methods for user management, rather than building a custom solution from scratch.
+
+#
+### Future Enhancements
++ **Playlist Feature**: Adding the ability for users to create and manage playlists
+
++ **Social Sharing**: Integrating social media sharing options for users to share their favorite songs or albums.
+
+#
+### Conclusion
+The Music Application Management System is designed to be a comprehensive solution for managing a music library. By utilizing Laravel and its ecosystem, the project ensures scalability, maintainability, and a rich set of features. This `README.md` aims to provide a thorough understanding of the project’s structure, functionalities, and the rationale behind various design choices. We hope you find this application useful and easy to navigate.
