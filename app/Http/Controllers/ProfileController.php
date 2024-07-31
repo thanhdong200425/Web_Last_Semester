@@ -68,10 +68,10 @@ class ProfileController extends Controller
     public function updateImage(Request $request)
     {
         $user = User::find(session('admin')->id);
-        $image = UserController::handleImage($request->image);
+        $image = UserController::handleImage('User', $request->image);
         $user->cover_photo = $image;
         $user->save();
-        
+
         session([
             'admin' => $user,
         ]);
